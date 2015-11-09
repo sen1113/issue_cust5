@@ -87,7 +87,8 @@ int main(int argc, char **argv){
 	       //Set id in K
 	       //"l.cust5 %%edx,%%eax,%%ebx,%2;"
 	       //"l.cust5 %0,,%1,%2;"
-	       "l.nop"
+	       "l.nop;"
+	       "l.j 1"
 	       :"=r"(out1)
 	       :"r"(top_addr),"r"(size),"r"(id),"r"(target_addr)
 	       :
