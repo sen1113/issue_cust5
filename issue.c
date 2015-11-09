@@ -86,7 +86,7 @@ int main(int argc, char **argv){
       	       //Set size in L
       	       //Set id in K
       	       //"l.cust5 00000,11111,00000,000000,00000;"
-      	       "l.cust5 %4,%1,%3,%2,0;"
+      	       "l.cust5 %1,%1,%3,0,0;"
       	       "l.nop;"
       	       "l.j 1"
       	       :"=r"(out1)
