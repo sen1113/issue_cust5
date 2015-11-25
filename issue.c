@@ -81,30 +81,32 @@ int main(int argc, char **argv){
 
   long num = 0;
   long out1 = 0;
-    /* if(num<filesize){ */
-    /*   //issue cust5 */
-    /*   //l.cust5 target_addr(5) top_addr(5) id(5) size(6) (5) */
-    /*   __asm__ (//"l.cmov %%r32,%%rA, %%rB;" //Set target_addr in registerD */
-    /*   	       //"l.cmov %3, %%eax;"//Set top_addr in registerA */
-    /*   	       //"l.movhi %%ebx,$0x00000"//Set  in registerB */
-    /*   	       //Set size in L */
-    /*   	       //Set id in K */
-    /*   	       //"l.cust5 00000,11111,00000,000000,00000;" */
-    /*   	       "l.cust5 %1,%1,%3,0,0;" */
-    /*   	       "l.nop;" */
-    /*   	       "l.j 1" */
-    /*   	       :"=r"(out1) */
-    /*   	       :"r"(top_addr),"r"(size),"r"(id),"r"(target_addr) */
-    /*   	       : */
-    /*   	       ); */
-    /* } */
-    /* else{ */
-    /*   /\* */
-    /* 	__asm__( */
-    /* 	"l.cust5 rD,rA,rB,L,K \n\t;" */
-    /* 	); */
-    /*   *\/ */
-    /* } */
+    if(num<filesize){
+      //issue cust5
+      //l.cust5 target_addr(5) top_addr(5) id(5) size(6) (5)
+      __asm__ (//"l.cmov %%r32,%%rA, %%rB;" //Set target_addr in registerD
+      	       //"l.cmov %3, %%eax;"//Set top_addr in registerA
+      	       //"l.movhi %%ebx,$0x00000"//Set  in registerB
+      	       //Set size in L
+      	       //Set id in K
+      	       //"l.cust5 00000,11111,00000,000000,00000;"
+      	       "l.cust5 %4,%1,%3,0,4;"//start keccak
+	       "l.cust5 %4,%1,%3,0,2;"//keccak in progress
+	       "l.cust5 %4,%1,%3,0,1;"//finish keccak
+      	       "l.nop;"
+      	       "l.j 1"
+      	       :"=r"(out1)
+      	       :"r"(top_addr),"r"(size),"r"(id),"r"(target_addr)
+      	       :
+      	       );
+    }
+    else{
+      /*
+    	__asm__(
+    	"l.cust5 rD,rA,rB,L,K \n\t;"
+    	);
+      */
+    }
 
 
   //file close
