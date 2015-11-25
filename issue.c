@@ -93,8 +93,10 @@ int main(int argc, char **argv){
       	       "l.cust5 %4,%1,%3,0,4;"//start keccak
 	       "l.cust5 %4,%1,%3,0,2;"//keccak in progress
 	       "l.cust5 %4,%1,%3,0,1;"//finish keccak
-      	       "l.nop;"
-      	       "l.j 1"
+      	       loop:
+	       "l.ldz %0,%
+	       //"l.nop;"
+      	       //"l.j 1"
       	       :"=r"(out1)
       	       :"r"(top_addr),"r"(size),"r"(id),"r"(target_addr)
       	       :
