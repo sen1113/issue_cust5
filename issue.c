@@ -93,8 +93,10 @@ int main(int argc, char **argv){
       	       "l.cust5 %4,%1,%3,0,4;"//start keccak
 	       "l.cust5 %4,%1,%3,0,2;"//keccak in progress
 	       "l.cust5 %4,%1,%3,0,1;"//finish keccak
-      	       loop:
-	       "l.ldz %0,%
+	       //LOOP:
+	       "l.cust5 %0,%1,%3,0,8;"//hash output
+	       "l.sw 0,%4,%0,0;"//
+	       //LOOPNZ ~~
 	       //"l.nop;"
       	       //"l.j 1"
       	       :"=r"(out1)
