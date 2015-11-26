@@ -22,6 +22,7 @@ cust5str_t* create_str(){
   return(str);
 }
 
+
 /* void destroy_str(cust5str_t* str){ */
 /*   if(str){ */
 /*     if(str->top_addr) free(str->top_addr); */
@@ -40,6 +41,7 @@ int main(int argc, char **argv){
   unsigned int size;
   unsigned long filesize;
   FILE *fp;
+  int msize = 64;//hash size is 512bit=64byte
 
 
 
@@ -62,6 +64,9 @@ int main(int argc, char **argv){
   input = (unsigned long*)malloc(filesize);
   size=fread(input,sizeof(unsigned char),filesize,fp);
 
+  //target addr setting
+  target_addr = (unsigned long*)malloc(msize);
+
 
   //str1 setting
   cust5str_t* str1 = create_str();
@@ -75,7 +80,7 @@ int main(int argc, char **argv){
   printf("input:%p\n",input);
   printf("buf:%s\n",buf);
   printf("topaddr:%08lx\n",str1->top_addr);
-
+  printf("target_addr:%p\n",target_addr);
 
   //inline assembler
 
@@ -116,5 +121,6 @@ int main(int argc, char **argv){
   //file close
   fclose(fp);
   free(input);
+  free(target_addr);
   // destroy_str(str1);
 }
