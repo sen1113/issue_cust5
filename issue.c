@@ -96,51 +96,51 @@ int main(int argc, char **argv){
     input_addr = input_addr + i*4;
     if (i == 0){
       __asm__(
-	"l.cust5 %0,%1,0,0,4;"	//start
+	"l.cust5 %0,%1,%1,0,4;"	//start
 	:"=r"(hash512)
 	:"r"(input_addr),"r"(target_addr)
-	      )
+	      );
     }
     else if(i < max){
       __asm__(
-	"l.cust5 %0,%1,0,0,2;"	//middle
+	"l.cust5 %0,%1,%1,0,2;"	//middle
 	:"=r"(hash512)
 	:"r"(input_addr),"r"(target_addr)
-	      )
+	      );
     }
     else if(i == max){
       __asm__(
-	"l.cust5 %0,%1,0,0,1;"	//end
+	"l.cust5 %0,%1,%1,0,1;"	//end
 	:"=r"(hash512)
 	:"r"(top_addr),"r"(target_addr)
-	      )
+	      );
     }
     //devide & output
     __asm__(
-	    "l.cust5 %0,0,0,0,8;l.addi %0,%1,4;"//store
-	    "l.cust5 %0,0,0,1,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,2,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,3,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,4,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,5,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,6,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,7,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,8,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,9,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,10,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,11,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,12,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,13,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,14,8;l.addi %0,%1,4;"
-	    "l.cust5 %0,0,0,15,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,0,8;l.addi %0,%1,4;"//store
+	    "l.cust5 %0,%2,%2,1,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,2,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,3,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,4,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,5,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,6,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,7,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,8,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,9,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,10,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,11,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,12,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,13,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,14,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,%2,%2,15,8;l.addi %0,%1,4;"
 	    :"=r"(output_addr)
-	    :"r"(target_addr)
+	    :"r"(target_addr),"r"(id)
 	    :
-	    )
-      }
-
-
+	    );
   }
+
+
+
 
   //file close
   fclose(fp);
