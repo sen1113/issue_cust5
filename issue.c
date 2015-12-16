@@ -34,6 +34,8 @@ cust5str_t* create_str(){
 
 int main(int argc, char **argv){
   unsigned long* top_addr;
+  unsigned long* input_addr;
+  unsigned long* output_addr;
   unsigned long* target_addr;
   unsigned long* input;
 
@@ -76,47 +78,69 @@ int main(int argc, char **argv){
   str1 -> size = size;
 
  //debug
-  printf("fp_addr:%p\n",fp);
-  printf("input:%p\n",input);
-  printf("buf:%s\n",buf);
-  printf("topaddr:%08lx\n",str1->top_addr);
-  printf("target_addr:%p\n",target_addr);
+  /* printf("fp_addr:%p\n",fp); */
+  /* printf("input:%p\n",input); */
+  /* printf("buf:%s\n",buf); */
+  /* printf("topaddr:%08lx\n",str1->top_addr); */
+  /* printf("target_addr:%p\n",target_addr); */
 
   //inline assembler
 
-  /* long num = 0; */
-  /* long out1 = 0; */
-  /*   if(num<filesize){ */
-  /*     //issue cust5 */
-  /*     //l.cust5 target_addr(5) top_addr(5) id(5) size(6) (5) */
-  /*     __asm__ (//"l.cmov %%r32,%%rA, %%rB;" //Set target_addr in registerD */
-  /*     	       //"l.cmov %3, %%eax;"//Set top_addr in registerA */
-  /*     	       //"l.movhi %%ebx,$0x00000"//Set  in registerB */
-  /*     	       //Set size in L */
-  /*     	       //Set id in K */
-  /*     	       //"l.cust5 00000,11111,00000,000000,00000;" */
-  /*     	       //"l.cust5 %4,%1,%3,0,4;"//start keccak */
-  /* 	       //"l.cust5 %4,%1,%3,0,2;"//keccak in progress */
-  /* 	       //"l.cust5 %4,%1,%3,0,1;"//finish keccak */
-  /* 	       //LOOP: */
-  /* 	       //"l.cust5 %0,%1,%3,0,8;"//hash output */
-  /* 	       //"l.sw 0,%4,%0,0;"// */
-  /* 	       //LOOPNZ ~~ */
-  /* 	       //"l.nop;" */
-  /*     	       //"l.j 1" */
-  /*     	       :"=r"(out1) */
-  /*     	       :"r"(top_addr),"r"(size),"r"(id),"r"(target_addr) */
-  /*     	       : */
-  /*     	       ); */
-  /*   } */
-  /*   else{ */
-  /*     /\* */
-  /*   	__asm__( */
-  /*   	"l.cust5 rD,rA,rB,L,K \n\t;" */
-  /*   	); */
-  /*     *\/ */
-  /*   } */
+  int	i      = 0;
+  int	max    = (int)size/4;
+  unsigned long hash512 = 0;
 
+  //input
+  input_addr   = top_addr;
+  for(i = 0; i <= max; i++){
+    input_addr = input_addr + i*4;
+    if (i == 0){
+      __asm__(
+	"l.cust5 %0,%1,0,0,4;"	//start
+	:"=r"(hash512)
+	:"r"(input_addr),"r"(target_addr)
+	      )
+    }
+    else if(i < max){
+      __asm__(
+	"l.cust5 %0,%1,0,0,2;"	//middle
+	:"=r"(hash512)
+	:"r"(input_addr),"r"(target_addr)
+	      )
+    }
+    else if(i == max){
+      __asm__(
+	"l.cust5 %0,%1,0,0,1;"	//end
+	:"=r"(hash512)
+	:"r"(top_addr),"r"(target_addr)
+	      )
+    }
+    //devide & output
+    __asm__(
+	    "l.cust5 %0,0,0,0,8;l.addi %0,%1,4;"//store
+	    "l.cust5 %0,0,0,1,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,2,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,3,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,4,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,5,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,6,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,7,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,8,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,9,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,10,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,11,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,12,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,13,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,14,8;l.addi %0,%1,4;"
+	    "l.cust5 %0,0,0,15,8;l.addi %0,%1,4;"
+	    :"=r"(output_addr)
+	    :"r"(target_addr)
+	    :
+	    )
+      }
+
+
+  }
 
   //file close
   fclose(fp);
@@ -124,3 +148,31 @@ int main(int argc, char **argv){
   free(target_addr);
   // destroy_str(str1);
 }
+
+
+    /* if(num<filesize){ */
+    /*   //issue cust5 */
+    /*   //l.cust5 target_addr(5) top_addr(5) id(5) size(6) (5) */
+    /*   __asm__ ( */
+    /* 	       "l.lwz %rA, %1,0b0000_0000_0000_0000;" */
+    /* 	       LOOP: */
+    /* 	       "l.lwz %rA, %1+4i, 0000_0000_0000_0000;" */
+    /* 	       ""//check loop_count */
+    /* 	       START: */
+    /* 	       "l.cust5 %2,%rA,00000,000000,00100;"//start keccak */
+    /* 	       "l.jr LOOP;" */
+    /* 	       PROGRESS: */
+    /* 	       "l.cust5 %2,%1,00000,000000,00010;"//keccak in progress */
+    /* 	       "l.jr LOOP;" */
+    /* 	       END: */
+    /* 	       "l.cust5 %4,%1,%3,0,1;"//finish keccak */
+
+    /* 	       "l.sfeqi %5,0;"//check if loop_count == 0 */
+    /* 	       "l.jr LOOP;" */
+    /* 	       //"l.cust5 %0,%1,%3,0,8;"//hash output */
+    /*   	       :"=r"(out1) */
+    /*   	       :"r"(top_addr),"r"(target_addr),"r"(loop_count) */
+    /*   	       : */
+    /*   	       ); */
+    /* } */
+   
