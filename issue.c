@@ -35,7 +35,7 @@ cust5str_t* create_str(){
 int main(int argc, char **argv){
   unsigned long* top_addr;
   unsigned long input_addr;
-  unsigned long* output_addr;
+  unsigned long output_addr;
   unsigned long* target_addr;
   unsigned long* input;
 
@@ -100,7 +100,8 @@ int main(int argc, char **argv){
   unsigned long hash512 = 0;
 
   //input
-  input_addr   =str1->top_addr;
+  input_addr   = str1->top_addr;
+  output_addr = *(target_addr);
   for(i = 0; i <= max-1; i++){
     input_addr = input_addr + i*4;
     if (i == 0){
@@ -152,7 +153,7 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK input\n");
   printf("----------------------------------\n");
   for(i=0;i<size/4;i++){
-    printf("%d:%ld\n",i,(input_addr+4*i));
+    printf("%d:%08lx\n",i,(input_addr+4*i));
   }
   printf("----------------------------------\n");
 
