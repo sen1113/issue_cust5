@@ -101,7 +101,6 @@ int main(int argc, char **argv){
 
   //input
   input_addr   = str1->top_addr;
-  output_addr = *(target_addr);
   for(i = 0; i <= max-1; i++){
     input_addr = input_addr + i*4;
     if (i == 0){
@@ -143,7 +142,7 @@ int main(int argc, char **argv){
   	    "l.cust5 %0,%2,%2,13,8;l.addi %0,%1,4;"
   	    "l.cust5 %0,%2,%2,14,8;l.addi %0,%1,4;"
   	    "l.cust5 %0,%2,%2,15,8;l.addi %0,%1,4;"
-  	    :"=r"(output_addr)
+  	    :"=r"(target_addr)
   	    :"r"(target_addr),"r"(id)
   	    :
   	    );
