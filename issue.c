@@ -80,8 +80,10 @@ int main(int argc, char **argv){
  //debug
   printf("fp_addr:%p\n",fp);
   printf("input:%p\n",input);
+  printf("contents of input:%ld\n",*input);
   printf("buf:%s\n",buf);
-  printf("topaddr:%08lx\n",str1->top_addr);
+  printf("topaddr:%08lx\n",str1->top_addr);//input file 1st 32bit
+  //printf("contents of topaddr:%ld\n",(str1->top_addr));
   printf("target_addr:%p\n",target_addr);
 
   //inline assembler
