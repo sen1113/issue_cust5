@@ -35,7 +35,6 @@ cust5str_t* create_str(){
 int main(int argc, char **argv){
   unsigned long* top_addr;
   unsigned long input_addr;
-  unsigned long output_addr;
   unsigned long* target_addr;
   unsigned long* input;
 
@@ -80,10 +79,9 @@ int main(int argc, char **argv){
  //debug
   printf("fp_addr:%p\n",fp);
   printf("input:%p\n",input);
-  printf("contents of input:%08lx\n",*input);
   printf("size:%d\n",size);
   printf("buf:%s\n",buf);
-  printf("topaddr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
+  //printf("topaddr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
   //printf("contents of topaddr:%ld\n",(str1->top_addr));
   printf("target_addr:%p\n",target_addr);
   int c;
@@ -101,6 +99,9 @@ int main(int argc, char **argv){
 
   //input
   input_addr   = str1->top_addr;
+
+  printf("input_addr:%ld\n",input_addr);
+
   for(i = 0; i <= max-1; i++){
     input_addr = input_addr + i*4;
     if (i == 0){
