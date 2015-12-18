@@ -147,12 +147,12 @@ int main(int argc, char **argv){
   	    :
   	    );
   }
-  int i;
+  
   //print hash
   printf("SHA-3:KECCAK input\n");
   printf("----------------------------------\n");
   for(i=0;i<size/4;i++){
-    printf("%d:%ld\n",i,*(input_addr+4*i));
+    printf("%d:%ld\n",i,(input_addr+4*i));
   }
   printf("----------------------------------\n");
 
