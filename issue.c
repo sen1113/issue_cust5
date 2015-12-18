@@ -92,7 +92,7 @@ int main(int argc, char **argv){
 
   //input
   input_addr   = top_addr;
-  for(i = 0; i <= max; i++){
+  for(i = 0; i <= max-1; i++){
     input_addr = input_addr + i*4;
     if (i == 0){
       __asm__(
@@ -101,14 +101,14 @@ int main(int argc, char **argv){
 	:"r"(input_addr),"r"(target_addr)
 	      );
     }
-    else if(i < max){
+    else if(i < max-1){
       __asm__(
 	"l.cust5 %0,%1,%1,0,2;"	//middle
 	:"=r"(hash512)
 	:"r"(input_addr),"r"(target_addr)
 	      );
     }
-    else if(i == max){
+    else if(i == max-1){
       __asm__(
 	"l.cust5 %0,%1,%1,0,1;"	//end
 	:"=r"(hash512)
@@ -139,8 +139,13 @@ int main(int argc, char **argv){
 	    );
   }
 
-
-
+  //print hash
+  printf("SHA-3:KECCAK output 512bit hash...\n");
+  printf("----------------------------------\n");
+  for(i=0;i<16;i++){
+    printf("%d:%ld\n",i,*(target_addr+4*i));
+  }
+  printf("----------------------------------\n");
 
   //file close
   fclose(fp);
@@ -150,29 +155,4 @@ int main(int argc, char **argv){
 }
 
 
-    /* if(num<filesize){ */
-    /*   //issue cust5 */
-    /*   //l.cust5 target_addr(5) top_addr(5) id(5) size(6) (5) */
-    /*   __asm__ ( */
-    /* 	       "l.lwz %rA, %1,0b0000_0000_0000_0000;" */
-    /* 	       LOOP: */
-    /* 	       "l.lwz %rA, %1+4i, 0000_0000_0000_0000;" */
-    /* 	       ""//check loop_count */
-    /* 	       START: */
-    /* 	       "l.cust5 %2,%rA,00000,000000,00100;"//start keccak */
-    /* 	       "l.jr LOOP;" */
-    /* 	       PROGRESS: */
-    /* 	       "l.cust5 %2,%1,00000,000000,00010;"//keccak in progress */
-    /* 	       "l.jr LOOP;" */
-    /* 	       END: */
-    /* 	       "l.cust5 %4,%1,%3,0,1;"//finish keccak */
 
-    /* 	       "l.sfeqi %5,0;"//check if loop_count == 0 */
-    /* 	       "l.jr LOOP;" */
-    /* 	       //"l.cust5 %0,%1,%3,0,8;"//hash output */
-    /*   	       :"=r"(out1) */
-    /*   	       :"r"(top_addr),"r"(target_addr),"r"(loop_count) */
-    /*   	       : */
-    /*   	       ); */
-    /* } */
-   
