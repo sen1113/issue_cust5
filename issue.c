@@ -78,11 +78,11 @@ int main(int argc, char **argv){
   str1 -> size = size;
 
  //debug
-  /* printf("fp_addr:%p\n",fp); */
-  /* printf("input:%p\n",input); */
-  /* printf("buf:%s\n",buf); */
-  /* printf("topaddr:%08lx\n",str1->top_addr); */
-  /* printf("target_addr:%p\n",target_addr); */
+  printf("fp_addr:%p\n",fp);
+  printf("input:%p\n",input);
+  printf("buf:%s\n",buf);
+  printf("topaddr:%08lx\n",str1->top_addr);
+  printf("target_addr:%p\n",target_addr);
 
   //inline assembler
 
@@ -91,7 +91,7 @@ int main(int argc, char **argv){
   unsigned long hash512 = 0;
 
   //input
-  input_addr   = top_addr;
+  input_addr   =&(str1->top_addr);
   for(i = 0; i <= max-1; i++){
     input_addr = input_addr + i*4;
     if (i == 0){
@@ -112,7 +112,7 @@ int main(int argc, char **argv){
       __asm__(
 	"l.cust5 %0,%1,%1,0,1;"	//end
 	:"=r"(hash512)
-	:"r"(top_addr),"r"(target_addr)
+	:"r"(input_addr),"r"(target_addr)
 	      );
     }
     //devide & output
@@ -138,6 +138,14 @@ int main(int argc, char **argv){
 	    :
 	    );
   }
+
+  //print hash
+  printf("SHA-3:KECCAK input\n");
+  printf("----------------------------------\n");
+  for(i=0;i<max;i++){
+    printf("%d:%ld\n",i,*(input_addr+4*i));
+  }
+  printf("----------------------------------\n");
 
   //print hash
   printf("SHA-3:KECCAK output 512bit hash...\n");
