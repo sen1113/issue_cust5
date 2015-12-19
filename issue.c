@@ -17,7 +17,7 @@ cust5str_t* create_str(){
     str -> top_addr = 0;
     str -> size = 0;
     str -> id = 0;
-    str -> target_addr = NULL;
+    str -> target_addr = 0;
   }
   return(str);
 }
@@ -74,7 +74,7 @@ int main(int argc, char **argv){
   char buf[9];
   sprintf(buf,"%p",input);
   str1 -> top_addr = strtoul(buf,NULL,16);
-  sprintf(bur,"%p",target_addr);
+  sprintf(buf,"%p",target_addr);
   str1 -> target_addr = strtoul(buf,NULL,16);
   str1 -> size = size;
 
