@@ -25,7 +25,7 @@ cust5str_t* create_str(){
 
 void destroy_str(cust5str_t* str){
   if(str){
-    if(str->top_addr) free(str->top_addr);
+    //if(str->top_addr) free(str->top_addr);
     if(str->target_addr) free(str->target_addr);
     free(str);
   }
