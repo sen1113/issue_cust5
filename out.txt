@@ -1,26 +1,51 @@
-Filesize:45
-fp_addr:0x94c1018
-input:0x94c1180
-contents of input:20656854
-size:45
-buf:0x94c1180
-topaddr:The quick brown fox jumps over the lazy dog.
+Filesize:48
+fp_addr:0x9574018
+input:0x9574180
+size:48
+buf:0x9574180
+contents of top_addr:The quick brown fox jumps over the lazy dog.123
 
-target_addr:0x94c11b8
-The quick brown fox jumps over the lazy dog.
+target_addr:0x95741b8
+input_addr:09574180
+----------------------------------
 SHA-3:KECCAK input
 ----------------------------------
-0:745848965
-1:1351158210
-2:-955494263
-3:-72
-4:501809164
-5:-1259798516
-6:1435526800
-7:-326959081
-8:608471488
-9:2039284801
-10:956825972
+0:09574180
+0:The quick brown fox jumps over the lazy dog.123
+
+1:09574184
+1:quick brown fox jumps over the lazy dog.123
+
+2:09574188
+2:k brown fox jumps over the lazy dog.123
+
+3:0957418c
+3:own fox jumps over the lazy dog.123
+
+4:09574190
+4:fox jumps over the lazy dog.123
+
+5:09574194
+5:jumps over the lazy dog.123
+
+6:09574198
+6:s over the lazy dog.123
+
+7:0957419c
+7:er the lazy dog.123
+
+8:095741a0
+8:he lazy dog.123
+
+9:095741a4
+9:azy dog.123
+
+10:095741a8
+10:dog.123
+
+11:095741ac
+11:123
+
 ----------------------------------
 SHA-3:KECCAK output 512bit hash...
 ----------------------------------

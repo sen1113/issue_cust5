@@ -34,7 +34,7 @@ cust5str_t* create_str(){
 
 int main(int argc, char **argv){
   unsigned long* top_addr;
-  unsigned long input_addr;
+  unsigned long input_addr;//NOT pointer
   unsigned long* target_addr;
   unsigned long* input;
 
@@ -81,83 +81,93 @@ int main(int argc, char **argv){
   printf("input:%p\n",input);
   printf("size:%d\n",size);
   printf("buf:%s\n",buf);
-  //printf("topaddr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
-  //printf("contents of topaddr:%ld\n",(str1->top_addr));
+  printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
   printf("target_addr:%p\n",target_addr);
   int c;
-  rewind(fp);
-  while (( c = fgetc(fp))!=EOF){
-    printf("%c",c);
-  }
+  /* //check raw file */
+  /* rewind(fp); */
+  /* while (( c = fgetc(fp))!=EOF){ */
+  /*   printf("%c",c); */
+  /* } */
 
 
   //inline assembler
 
   int	i      = 0;
   int	max    = (int)size/4;
-  unsigned long hash512 = 0;
+  unsigned long hash32 = 0;
 
   //input
-  input_addr   = str1->top_addr;
+  input_addr = str1->top_addr;
 
-  printf("input_addr:%ld\n",input_addr);
+  printf("input_addr:%08lx\n",input_addr);
 
   for(i = 0; i <= max-1; i++){
-    input_addr = input_addr + i*4;
+    input_addr = input_addr + 4*i;//generate next input_addr
     if (i == 0){
       __asm__(
-  	"l.cust5 %0,%1,%1,0,4;"	//start
-  	:"=r"(hash512)
-  	:"r"(input_addr),"r"(target_addr)
+	"l.lwa r3,%1,0;"//LOAD FROM input_addr to r3
+  	"l.cust5 %0,r3,%1,0,4;"	//start
+  	:"=r"(hash32)
+  	:"r"(input_addr)
+	:"r3"
   	      );
     }
     else if(i < max-1){
       __asm__(
-  	"l.cust5 %0,%1,%1,0,2;"	//middle
-  	:"=r"(hash512)
-  	:"r"(input_addr),"r"(target_addr)
+	"l.lwa r3,%1,0;"//LOAD FROM input_addr to r3
+  	"l.cust5 %0,r3,%1,0,2;"	//middle
+  	:"=r"(hash32)
+  	:"r"(input_addr)
+	:"r3"
   	      );
     }
     else if(i == max-1){
       __asm__(
-  	"l.cust5 %0,%1,%1,0,1;"	//end
-  	:"=r"(hash512)
-  	:"r"(input_addr),"r"(target_addr)
+	"l.lwa r3,%1,0;"//LOAD FROM input_addr to r3
+  	"l.cust5 %0,r3,%1,0,1;"	//end
+  	:"=r"(hash32)
+  	:"r"(input_addr)
+	:"r3"
   	      );
     }
-    //devide & output
+    //devide ; output ;rotate
+    //l.cust5 hash32 XX,XX, hash_num,storemode
+    //l.sw 0,target_addr,hash32,0;
     __asm__(
-  	    "l.cust5 %0,%2,%2,0,8;l.addi %0,%1,4;"//store
-  	    "l.cust5 %0,%2,%2,1,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,2,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,3,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,4,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,5,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,6,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,7,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,8,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,9,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,10,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,11,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,12,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,13,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,14,8;l.addi %0,%1,4;"
-  	    "l.cust5 %0,%2,%2,15,8;l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 0,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"//store
+  	    "l.cust5 %2,%3,%3, 1,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 2,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 3,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 4,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 5,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 6,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 7,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 8,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3, 9,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3,10,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3,11,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3,12,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3,13,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3,14,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
+  	    "l.cust5 %2,%3,%3,15,8; l.sw 0,%0,%2,0; l.addi %0,%1,4;"
   	    :"=r"(target_addr)
-  	    :"r"(target_addr),"r"(id)
+  	    :"r"(target_addr),"r"(hash32),"r"(id)
   	    :
   	    );
   }
-  
+
   //print hash
+  printf("----------------------------------\n");
   printf("SHA-3:KECCAK input\n");
   printf("----------------------------------\n");
   for(i=0;i<size/4;i++){
     printf("%d:%08lx\n",i,(input_addr+4*i));
+    printf("%d:%s\n",i,(char*)(input_addr+4*i));
   }
-  printf("----------------------------------\n");
 
   //print hash
+  printf("----------------------------------\n");
   printf("SHA-3:KECCAK output 512bit hash...\n");
   printf("----------------------------------\n");
   for(i=0;i<16;i++){
