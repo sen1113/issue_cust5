@@ -23,13 +23,13 @@ cust5str_t* create_str(){
 }
 
 
-/* void destroy_str(cust5str_t* str){ */
-/*   if(str){ */
-/*     if(str->top_addr) free(str->top_addr); */
-/*     if(str->target_addr) free(str->target_addr); */
-/*     free(str); */
-/*   } */
-/* } */
+void destroy_str(cust5str_t* str){
+  if(str){
+    if(str->top_addr) free(str->top_addr);
+    if(str->target_addr) free(str->target_addr);
+    free(str);
+  }
+}
 
 
 int main(int argc, char **argv){
@@ -100,10 +100,9 @@ int main(int argc, char **argv){
   //input
   input_addr = str1->top_addr;
 
-  printf("input_addr:%08lx\n",input_addr);
-
   for(i = 0; i <= max-1; i++){
-    input_addr = input_addr + 4*i;//generate next input_addr
+   input_addr = input_addr + 4*i;//generate next input_addr
+ printf("input_addr:%08lx\n",input_addr);
     if (i == 0){
       __asm__(
 	"l.lwz %2,0(%1);"
@@ -157,6 +156,7 @@ int main(int argc, char **argv){
   	    );
   }
 
+  input_addr = str1->top_addr;// input_addr set again
   //print hash
   printf("----------------------------------\n");
   printf("SHA-3:KECCAK input\n");
@@ -179,7 +179,7 @@ int main(int argc, char **argv){
   fclose(fp);
   free(input);
   free(target_addr);
-  // destroy_str(str1);
+  destroy_str(str1);
 }
 
 
