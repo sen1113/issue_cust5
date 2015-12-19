@@ -6,7 +6,7 @@ typedef struct{
 	unsigned long top_addr;//top addr
 	unsigned int size;//size
 	unsigned int id;//id
-	unsigned long* target_addr;//target addr
+	unsigned long target_addr;//target addr
 }cust5str_t;
 
 cust5str_t* create_str(){
@@ -15,9 +15,9 @@ cust5str_t* create_str(){
   str=(cust5str_t*)malloc(sizeof(cust5str_t));
   if(str){
     str -> top_addr = 0;
-    str->size = 0;
-    str->id = 0;
-    str->target_addr = NULL;
+    str -> size = 0;
+    str -> id = 0;
+    str -> target_addr = NULL;
   }
   return(str);
 }
@@ -26,7 +26,7 @@ cust5str_t* create_str(){
 void destroy_str(cust5str_t* str){
   if(str){
     //if(str->top_addr) free(str->top_addr);
-    if(str->target_addr) free(str->target_addr);
+    //if(str->target_addr) free(str->target_addr);
     free(str);
   }
 }
@@ -74,6 +74,8 @@ int main(int argc, char **argv){
   char buf[9];
   sprintf(buf,"%p",input);
   str1 -> top_addr = strtoul(buf,NULL,16);
+  sprintf(bur,"%p",target_addr);
+  str1 -> target_addr = strtoul(buf,NULL,16);
   str1 -> size = size;
 
  //debug
@@ -83,13 +85,6 @@ int main(int argc, char **argv){
   printf("buf:%s\n",buf);
   printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
   printf("target_addr:%p\n",target_addr);
-  int c;
-  /* //check raw file */
-  /* rewind(fp); */
-  /* while (( c = fgetc(fp))!=EOF){ */
-  /*   printf("%c",c); */
-  /* } */
-
 
   //inline assembler
 
@@ -98,11 +93,9 @@ int main(int argc, char **argv){
   unsigned long hash32 = 0;
   unsigned long tmp;
   //input
-  //  input_addr = str1->top_addr;
 
   for(i = 0; i <= max-1; i++){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
-   printf("input_addr:%08lx\n",input_addr);
     if (i == 0){
       __asm__(
 	"l.lwz %2,0(%1);"
@@ -156,14 +149,15 @@ int main(int argc, char **argv){
   	    );
   }
 
-  input_addr = str1->top_addr;// input_addr set again
+  //  input_addr = str1 -> top_addr;// input_addr set again
+  // target_addr set again
   //print hash
   printf("----------------------------------\n");
   printf("SHA-3:KECCAK input\n");
   printf("----------------------------------\n");
   for(i=0;i<size/4;i++){
-    printf("%d:%08lx\n",i,(input_addr+4*i));//addr
-    printf("%d:%s\n",i,(char*)(input_addr+4*i));//contents
+    printf("%d:%08lx\n",i,(str1->top_addr+4*i));//addr
+    printf("%d:%s\n",i,(char*)(str1->top_addr+4*i));//contents
   }
 
   //print hash
@@ -171,8 +165,8 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK output 512bit hash...\n");
   printf("----------------------------------\n");
   for(i=0;i<16;i++){
-    printf("%d:%08lx\n",i,*(target_addr+4*i));
-    printf("%d:%p\n",i,(target_addr+4*i));
+    printf("%d:%08lx\n",i,(str1->target_addr+4*i));//addr 
+    printf("%d:%08lx\n",i,(unsigned long*)(str1->target_addr+4*i));//content
   }
   printf("----------------------------------\n");
 
