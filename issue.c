@@ -68,7 +68,6 @@ int main(int argc, char **argv){
   //target addr setting
   target_addr = (unsigned long*)malloc(msize);
 
-
   //str1 setting
   cust5str_t* str1 = create_str();
   char buf[9];
@@ -149,15 +148,15 @@ int main(int argc, char **argv){
   	    );
   }
 
-  //  input_addr = str1 -> top_addr;// input_addr set again
-  // target_addr set again
+  input_addr = str1 -> top_addr;// input_addr set again
+  target_addr = target_addr -16;// target_addr set again
   //print hash
   printf("----------------------------------\n");
   printf("SHA-3:KECCAK input\n");
   printf("----------------------------------\n");
   for(i=0;i<size/4;i++){
-    printf("%d:%08lx\n",i,(str1->top_addr+4*i));//addr
-    printf("%d:%s\n",i,(char*)(str1->top_addr+4*i));//contents
+    printf("%d:%08lx\n",i,(input_addr+4*i));//addr
+    printf("%d:%s\n",i,(char*)(input_addr+4*i));//contents
   }
 
   //print hash
@@ -165,8 +164,8 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK output 512bit hash...\n");
   printf("----------------------------------\n");
   for(i=0;i<16;i++){
-    printf("%d:%08lx\n",i,(str1->target_addr+4*i));//addr 
-    printf("%d:%08lx\n",i,(unsigned long*)(str1->target_addr+4*i));//content
+    printf("%d:%p\n",i,(target_addr+i));//addr
+    printf("%d:%08lx\n",i,*(target_addr+i));//content
   }
   printf("----------------------------------\n");
 
