@@ -98,11 +98,11 @@ int main(int argc, char **argv){
   unsigned long hash32 = 0;
   unsigned long tmp;
   //input
-  input_addr = str1->top_addr;
+  //  input_addr = str1->top_addr;
 
   for(i = 0; i <= max-1; i++){
-   input_addr = input_addr + 4*i;//generate next input_addr
- printf("input_addr:%08lx\n",input_addr);
+   input_addr = str1->top_addr + 4*i;//generate next input_addr
+   printf("input_addr:%08lx\n",input_addr);
     if (i == 0){
       __asm__(
 	"l.lwz %2,0(%1);"
@@ -162,8 +162,8 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK input\n");
   printf("----------------------------------\n");
   for(i=0;i<size/4;i++){
-    printf("%d:%08lx\n",i,(input_addr+4*i));
-    printf("%d:%s\n",i,(char*)(input_addr+4*i));
+    printf("%d:%08lx\n",i,(input_addr+4*i));//addr
+    printf("%d:%s\n",i,(char*)(input_addr+4*i));//contents
   }
 
   //print hash
@@ -171,7 +171,8 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK output 512bit hash...\n");
   printf("----------------------------------\n");
   for(i=0;i<16;i++){
-    printf("%d:%ld\n",i,*(target_addr+4*i));
+    printf("%d:%08lx\n",i,*(target_addr+4*i));
+    printf("%d:%p\n",i,(target_addr+4*i));
   }
   printf("----------------------------------\n");
 
