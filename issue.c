@@ -25,8 +25,6 @@ cust5str_t* create_str(){
 
 void destroy_str(cust5str_t* str){
   if(str){
-    //if(str->top_addr) free(str->top_addr);
-    //if(str->target_addr) free(str->target_addr);
     free(str);
   }
 }
@@ -97,7 +95,7 @@ int main(int argc, char **argv){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
     if (i == 0){
       __asm__(
-	"l.lwz %2,0(%1);"
+	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
   	"l.cust5 %0,%2,%1,0,4;"	//start
   	:"=r"(hash32)
   	:"r"(input_addr),"r"(tmp)
@@ -106,7 +104,7 @@ int main(int argc, char **argv){
     }
     else if(i < max-1){
       __asm__(
-	"l.lwz %2,0(%1);"//LOAD FROM input_addr to r3
+	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
   	"l.cust5 %0,%2,%1,0,2;"	//middle
   	:"=r"(hash32)
   	:"r"(input_addr),"r"(tmp)
@@ -115,7 +113,7 @@ int main(int argc, char **argv){
     }
     else if(i == max-1){
       __asm__(
-	"l.lwz %2,0(%1);"//LOAD FROM input_addr to r3
+	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
   	"l.cust5 %0,%2,%1,0,1;"	//end
   	:"=r"(hash32)
   	:"r"(input_addr),"r"(tmp)
@@ -126,23 +124,23 @@ int main(int argc, char **argv){
     //l.cust5 hash32 XX,XX, hash_num,storemode
     //l.sw 0,target_addr,hash32,0;
     __asm__(
-  	    "l.cust5 %2,%3,%3, 0,8; l.sw 0(%0),%2; l.addi %0,%1,4;"//store
-  	    "l.cust5 %2,%3,%3, 1,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 2,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 3,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 4,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 5,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 6,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 7,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 8,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3, 9,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3,10,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3,11,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3,12,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3,13,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3,14,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    "l.cust5 %2,%3,%3,15,8; l.sw 0(%0),%2; l.addi %0,%1,4;"
-  	    :"=r"(target_addr)
+  	    "l.cust5 %2,%3,%3, 0,8; l.sw 0(%1),%2; "//store
+  	    "l.cust5 %2,%3,%3, 1,8; l.sw 4(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 2,8; l.sw 8(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 3,8; l.sw 12(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 4,8; l.sw 16(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 5,8; l.sw 20(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 6,8; l.sw 24(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 7,8; l.sw 28(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 8,8; l.sw 32(%1),%2; "
+  	    "l.cust5 %2,%3,%3, 9,8; l.sw 36(%1),%2; "
+  	    "l.cust5 %2,%3,%3,10,8; l.sw 40(%1),%2; "
+  	    "l.cust5 %2,%3,%3,11,8; l.sw 44(%1),%2; "
+  	    "l.cust5 %2,%3,%3,12,8; l.sw 48(%1),%2; "
+  	    "l.cust5 %2,%3,%3,13,8; l.sw 52(%1),%2; "
+  	    "l.cust5 %2,%3,%3,14,8; l.sw 56(%1),%2; "
+  	    "l.cust5 %2,%3,%3,15,8; l.sw 60(%1),%2; "
+  	    :"=r"(tmp)
   	    :"r"(target_addr),"r"(hash32),"r"(id)
   	    :
   	    );
