@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 
 typedef struct{
 	unsigned long top_addr;//top addr
@@ -120,6 +121,11 @@ int main(int argc, char **argv){
 	:
   	      );
     }
+
+    //wait for Keccak 10 seconds
+    sleep(10);
+
+
     //devide ; output ;rotate
     //l.cust5 hash32 XX,XX, hash_num,storemode
     //l.sw 0,target_addr,hash32,0;
