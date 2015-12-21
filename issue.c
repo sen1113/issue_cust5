@@ -147,7 +147,7 @@ int main(int argc, char **argv){
   }
 
   input_addr = str1 -> top_addr;// input_addr set again
-  target_addr = target_addr -16;// target_addr set again
+  target_addr = target_addr -12;// target_addr set again
   //print hash
   printf("----------------------------------\n");
   printf("SHA-3:KECCAK input\n");
