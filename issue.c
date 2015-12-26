@@ -182,6 +182,7 @@ unsigned long dummy;
   __asm__(
 	  "l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
 	  "l.cust5 %3,%2,%1,0,4;"	//start
+	  "l.lwz %2,4(%1);"//LOAD FROM input_addr to tmp
 	  "l.cust5 %3,%2,%1,0,1;"	//end
 "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" 
 "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
@@ -193,7 +194,7 @@ unsigned long dummy;
 	  "l.cust5 %3,%2,%2, 0,8;"//store
 	  "l.sw 0(%0),%3;"
   	:"=r"(target_addr)
-  	:"r"(input_addr),"r"(tmp),"r"(dummy)
+  	:"r"(input_addr),"r"(tmp),"r"(hash32)
 	:
 	  ); printf("%08lx\n",*(target_addr));
   input_addr = str1 -> top_addr;// input_addr set again
