@@ -177,7 +177,7 @@ int main(int argc, char **argv){
 /* 	  ); */
 
 //test
-  int dummy;
+unsigned long dummy;
   input_addr = str1->top_addr;//generate next input_addr
   __asm__(
 	  "l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
