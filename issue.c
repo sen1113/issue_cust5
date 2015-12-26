@@ -182,7 +182,7 @@ int main(int argc, char **argv){
   	:"=r"(hash32)
   	:"r"(input),"r"(tmp)
 	:
-  	      ); printf("%08lx\n",hash32);
+  	      ); printf("%08lx\n",hash32);printf("%s\n",(char*)hash32);
 
   input_addr = str1 -> top_addr;// input_addr set again
   //target_addr = target_addr -12;// target_addr set again
