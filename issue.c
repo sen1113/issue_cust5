@@ -183,7 +183,14 @@ int main(int argc, char **argv){
 	  "l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
 	  "l.cust5 %3,%2,%1,0,4;"	//start
 	  "l.cust5 %3,%2,%1,0,1;"	//end
-	  "l.cust5 %3,%1,%1, 0,8;"//store
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" 
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+	  "l.cust5 %3,%2,%2, 0,8;"//store
 	  "l.sw 0(%0),%3;"
   	:"=r"(target_addr)
   	:"r"(input_addr),"r"(tmp),"r"(dummy)
