@@ -178,7 +178,7 @@ int main(int argc, char **argv){
 
 //test
       __asm__(
-	"l.lwz %0,(%1);"//LOAD FROM input_addr to tmp
+	"l.lwz %0,0(%1);"//LOAD FROM input_addr to tmp
   	:"=r"(hash32)
   	:"r"(input),"r"(tmp)
 	:
