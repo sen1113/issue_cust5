@@ -180,18 +180,18 @@ int main(int argc, char **argv){
   input_addr = str1->top_addr;//generate next input_addr
   __asm__(
 	  "l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
-	  "l.cust5 %3,%2,%1,0,4;"	//start
-	  "l.lwz %2,4(%1);"//LOAD FROM input_addr to tmp
-      	  "l.cust5 %3,%2,%1,0,1;"	//end
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.cust5 %3,%2,%2, 0,8;"//store
-	  "l.sw 0(%0),%3;"
+/* 	  "l.cust5 %3,%2,%2,0,4;"	//start */
+/* 	  "l.lwz %2,4(%1);"//LOAD FROM input_addr to tmp */
+/*       	  "l.cust5 %3,%2,%2,0,1;"	//end */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* 	  "l.cust5 %3,%2,%2, 0,8;"//store */
+/* 	  "l.sw 0(%0),%3;" */
   	:"=r"(target_addr)
   	:"r"(input_addr),"r"(tmp),"r"(hash32)
 	:
