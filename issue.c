@@ -92,57 +92,57 @@ int main(int argc, char **argv){
   unsigned long tmp;
   //input
 
-  for(i = 0; i <= max-1; i++){
-   input_addr = str1->top_addr + 4*i;//generate next input_addr
-    if (i == 0){
-      __asm__(
-	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
-  	"l.cust5 %0,%2,%1,0,4;"	//start
-  	:"=r"(hash32)
-  	:"r"(input_addr),"r"(tmp)
-	:
-  	      ); printf("%d\t %08lx\n",i,hash32);
-    }
-    else if(i < max-1){
-      __asm__(
-	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
-  	"l.cust5 %0,%2,%1,0,2;"	//middle
-  	:"=r"(hash32)
-  	:"r"(input_addr),"r"(tmp)
-	:
-  	      );  printf("%d\t %08lx\n",i,hash32);
-    }
-    else if(i == max-1){
-      __asm__(
-	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
-  	"l.cust5 %0,%2,%1,0,1;"	//end
-  	:"=r"(hash32)
-  	:"r"(input_addr),"r"(tmp)
-	:
-  	      ); printf("%d\t %08lx\n",i,hash32);
-    }
-  }//End of "for" loop
+/*   for(i = 0; i <= max-1; i++){ */
+/*    input_addr = str1->top_addr + 4*i;//generate next input_addr */
+/*     if (i == 0){ */
+/*       __asm__( */
+/* 	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp */
+/*   	"l.cust5 %0,%2,%1,0,4;"	//start */
+/*   	:"=r"(hash32) */
+/*   	:"r"(input_addr),"r"(tmp) */
+/* 	: */
+/*   	      ); printf("%d\t %08lx\n",i,hash32); */
+/*     } */
+/*     else if(i < max-1){ */
+/*       __asm__( */
+/* 	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp */
+/*   	"l.cust5 %0,%2,%1,0,2;"	//middle */
+/*   	:"=r"(hash32) */
+/*   	:"r"(input_addr),"r"(tmp) */
+/* 	: */
+/*   	      );  printf("%d\t %08lx\n",i,hash32); */
+/*     } */
+/*     else if(i == max-1){ */
+/*       __asm__( */
+/* 	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp */
+/*   	"l.cust5 %0,%2,%1,0,1;"	//end */
+/*   	:"=r"(hash32) */
+/*   	:"r"(input_addr),"r"(tmp) */
+/* 	: */
+/*   	      ); printf("%d\t %08lx\n",i,hash32); */
+/*     } */
+/*   }//End of "for" loop */
 
 
 
-  //devide ; output ;rotate
-  //l.cust5 hash32 XX,XX, hash_num,storemode
-  //l.sw 0,target_addr,hash32,0;
-  __asm__("l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" 
+/*   //devide ; output ;rotate */
+/*   //l.cust5 hash32 XX,XX, hash_num,storemode */
+/*   //l.sw 0,target_addr,hash32,0; */
+/*   __asm__("l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"  */
 
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
+/* "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;" */
 
 
-	  "l.cust5 %0,%1,%1, 0,8;"
-	  :"=r"(hash32)
-	  :"r"(tmp)
-	  :
-	  );printf("hash32[0]:%08lx\n",hash32);
+/* 	  "l.cust5 %0,%1,%1, 0,8;" */
+/* 	  :"=r"(hash32) */
+/* 	  :"r"(tmp) */
+/* 	  : */
+/* 	  );printf("hash32[0]:%08lx\n",hash32); */
 
 /*   __asm__( */
 /* 	  "l.cust5 %2,%3,%3, 0,8;" */
