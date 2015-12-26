@@ -182,8 +182,14 @@ int main(int argc, char **argv){
   	:"=r"(hash32)
   	:"r"(input),"r"(tmp)
 	:
-  	      ); printf("%08lx\n",hash32);printf("%s\n",(char*)hash32);
-
+  	      ); printf("%08lx\n",hash32);
+      input_addr = str1->top_addr;//generate next input_addr
+      __asm__(
+	"l.lwz %0,0(%1);"//LOAD FROM input_addr to tmp
+  	:"=r"(hash32)
+  	:"r"(input_addr),"r"(tmp)
+	:
+  	      ); printf("%08lx\n",hash32);
   input_addr = str1 -> top_addr;// input_addr set again
   //target_addr = target_addr -12;// target_addr set again
   //print hash
