@@ -129,7 +129,17 @@ int main(int argc, char **argv){
   //l.cust5 hash32 XX,XX, hash_num,storemode
   //l.sw 0,target_addr,hash32,0;
   __asm__(
-	  "l.cust5 %2,%3,%3, 0,8; l.sw 0(%1),%2; "//store
+	  "l.cust5 %2,%3,%3, 0,8;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+"l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
+
+
+" l.sw 0(%1),%2; "//store
 	  "l.cust5 %2,%3,%3, 1,8; l.sw 4(%1),%2; "
 	  "l.cust5 %2,%3,%3, 2,8; l.sw 8(%1),%2; "
 	  "l.cust5 %2,%3,%3, 3,8; l.sw 12(%1),%2; "
