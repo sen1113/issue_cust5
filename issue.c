@@ -177,16 +177,13 @@ int main(int argc, char **argv){
 /* 	  ); */
 
 //test
-  int p = 0;
-  int q = 1;
-  __asm__(
-    "l.addi %0,%1,1;"
-      :"=r"(p)
-      :"r"(q)
-      :
-	  );
-  printf("%d\n",p);
-
+      __asm__(
+	"l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
+  	"l.cust5 %0,%2,%1,0,4;"	//start
+  	:"=r"(hash32)
+  	:"r"(input),"r"(tmp)
+	:
+  	      ); printf("%08lx\n",hash32);
 
   input_addr = str1 -> top_addr;// input_addr set again
   //target_addr = target_addr -12;// target_addr set again
