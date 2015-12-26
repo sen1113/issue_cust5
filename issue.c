@@ -180,7 +180,7 @@ int main(int argc, char **argv){
   unsigned long dummy;
   input_addr = str1->top_addr;//generate next input_addr
   __asm__(
-	  "l.lwz %2,0(%1);"LOAD FROM input_addr to tmp
+	  "l.lwz %2,0(%1);"//LOAD FROM input_addr to tmp
 	  "l.cust5 %3,%2,%2,0,4;"	//start
 	  "l.lwz %2,4(%1);"//LOAD FROM input_addr to tmp
       	  "l.cust5 %3,%2,%2,0,1;"	//end
@@ -194,7 +194,7 @@ int main(int argc, char **argv){
 	  "l.cust5 %0,%2,%2, 0,8;"//store
 	  //"l.sw 0(%0),%3;"
   	:"=r"(hash32)
-  	:"r"(input_addr),"r"(tmp)
+	  :"r"(input_addr),"r"(tmp),"r"(dummy)
 	:
 	  ); printf("%08lx\n",hash32);
   input_addr = str1 -> top_addr;// input_addr set again
