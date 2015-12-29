@@ -122,10 +122,10 @@ int main(int argc, char **argv){
   	:"r"(input_addr),"r"(dummy)
 	:
   	      ); printf("%d\t %08lx\n",i,tmp);
-    }
-  }//End of "for" loop
+      // }
+      // }//End of "for" loop
 
-  sleep(50);
+  sleep(10);
 
 /*   //devide ; output ;rotate */
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
@@ -160,7 +160,8 @@ int main(int argc, char **argv){
 	  :"memory"
 	  );
   printf("hash32:%08lx\n",hash32);
-
+    }
+  }
 //test
 /*   unsigned long dummy; */
 /*   input_addr = str1->top_addr;//generate next input_addr */
