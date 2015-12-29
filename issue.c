@@ -101,7 +101,7 @@ int main(int argc, char **argv){
   	:"=r"(hash32)
   	:"r"(input_addr),"r"(tmp)
 	:
-  	      ); printf("%d\t %08lx %s\n",i,tmp,(char*)tmp);
+  	      ); printf("%d\t %08lx %s\n",i,hash32,(char*)hash32);
     }
     else if(i < max-1){
       __asm__(
