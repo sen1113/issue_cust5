@@ -157,7 +157,7 @@ int main(int argc, char **argv){
 	  :"=r"(hash32)
 	  :"r"(target_addr),"r"(tmp),"r"(dummy)
 	  :
-	  );
+	  );printf("hash32:%08lx\n",hash32);
 
 //test
 /*   unsigned long dummy; */
