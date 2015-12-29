@@ -125,7 +125,7 @@ int main(int argc, char **argv){
     }
   }//End of "for" loop
 
-
+  sleep(50);
 
 /*   //devide ; output ;rotate */
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
@@ -138,7 +138,7 @@ int main(int argc, char **argv){
 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
-	  "l.cust5 %0, %2, %2,0,8\n\t"
+	  "l.cust5 %0, %2, %2,15,8\n\t"
 	  /* "l.cust5 %2,%3,%3, 0,8\n\t l.sw 0(%1),%2\n\t "//store */
 	  /* "l.cust5 %2,%3,%3, 1,8\n\t l.sw 4(%1),%2\n\t " */
 	  /* "l.cust5 %2,%3,%3, 2,8\n\t l.sw 8(%1),%2\n\t " */
