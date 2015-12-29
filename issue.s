@@ -351,7 +351,8 @@ main:
 	l.lwz   	r4,-68(r2)	 # SI load
 #APP
 # 109 "issue.c" 1
-	l.lwz r14,0(r3);l.cust5 r4,r14,r3,0,2;
+	l.lwz r14,0(r3)
+	l.cust5 r4,r14,r3,0,2;
 # 0 "" 2
 #NO_APP
 	l.sw    	-20(r2),r14	 # SI store

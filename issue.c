@@ -88,6 +88,7 @@ int main(int argc, char **argv){
 
   int	i      = 0;
   int	max    = (int)size/4;
+  int store_en = 0;
   unsigned long hash32 = 0;
   unsigned long tmp = 0;
   unsigned long dummy = 0; 
@@ -106,7 +107,7 @@ int main(int argc, char **argv){
     }
     else if(i < max-1){
       __asm__(
-	"l.lwz %0,0(%1);"//LOAD FROM input_addr to tmp
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
   	"l.cust5 %2,%0,%1,0,2;"	//middle
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
