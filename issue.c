@@ -156,7 +156,7 @@ int main(int argc, char **argv){
 	  "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t "
 	  :"=r"(hash32)
 	  :"r"(target_addr),"r"(tmp),"r"(dummy)
-	  :
+	  :"memory"
 	  );printf("hash32:%08lx\n",hash32);
 
 //test
