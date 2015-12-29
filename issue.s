@@ -99,16 +99,18 @@ destroy_str:
 .LC10:
 	.string	"%d\t %08lx\n"
 .LC11:
-	.string	"----------------------------------"
+	.string	"hash32:%08lx\n"
 .LC12:
-	.string	"SHA-3:KECCAK input"
+	.string	"----------------------------------"
 .LC13:
-	.string	"%d:%08lx\n"
+	.string	"SHA-3:KECCAK input"
 .LC14:
-	.string	"%d:%s\n"
+	.string	"%d:%08lx\n"
 .LC15:
-	.string	"SHA-3:KECCAK output 512bit hash..."
+	.string	"%d:%s\n"
 .LC16:
+	.string	"SHA-3:KECCAK output 512bit hash..."
+.LC17:
 	.string	"%d:%p\n"
 	.section .text
 	.align	4
@@ -405,6 +407,9 @@ main:
 	l.sfges 	r4,r3
 	l.bf	.L11
 	l.nop			# nop delay slot
+	l.addi  	r3,r0,10	 # move immediate I
+	l.jal   	sleep
+	l.nop			# nop delay slot
 	l.lwz   	r3,-48(r2)	 # SI load
 	l.lwz   	r4,-20(r2)	 # SI load
 	l.lwz   	r5,-68(r2)	 # SI load
@@ -470,55 +475,62 @@ main:
 	l.nop 0
 	l.nop 0
 	l.nop 0
-	l.cust5 r14,r5,r5, 0,8
-	 l.sw 0(r3),r14
-	 l.cust5 r14,r5,r5, 1,8
-	 l.sw 4(r3),r14
-	 l.cust5 r14,r5,r5, 2,8
-	 l.sw 8(r3),r14
-	 l.cust5 r14,r5,r5, 3,8
-	 l.sw 12(r3),r14
-	 l.cust5 r14,r5,r5, 4,8
-	 l.sw 16(r3),r14
-	 l.cust5 r14,r5,r5, 5,8
-	 l.sw 20(r3),r14
-	 l.cust5 r14,r5,r5, 6,8
-	 l.sw 24(r3),r14
-	 l.cust5 r14,r5,r5, 7,8
-	 l.sw 28(r3),r14
-	 l.cust5 r14,r5,r5, 8,8
-	 l.sw 32(r3),r14
-	 l.cust5 r14,r5,r5, 9,8
-	 l.sw 36(r3),r14
-	 l.cust5 r14,r5,r5,10,8
-	 l.sw 40(r3),r14
-	 l.cust5 r14,r5,r5,11,8
-	 l.sw 44(r3),r14
-	 l.cust5 r14,r5,r5,12,8
-	 l.sw 48(r3),r14
-	 l.cust5 r14,r5,r5,13,8
-	 l.sw 52(r3),r14
-	 l.cust5 r14,r5,r5,14,8
-	 l.sw 56(r3),r14
-	 l.cust5 r14,r5,r5,15,8
-	 l.sw 60(r3),r14
+	l.cust5 r14, r5,r5,15,8
+	l.cust5 r4,r5,r5, 0,8
+	 l.sw 0(r3),r4
+	 l.cust5 r4,r5,r5, 1,8
+	 l.sw 4(r3),r4
+	 l.cust5 r4,r5,r5, 2,8
+	 l.sw 8(r3),r4
+	 l.cust5 r4,r5,r5, 3,8
+	 l.sw 12(r3),r4
+	 l.cust5 r4,r5,r5, 4,8
+	 l.sw 16(r3),r4
+	 l.cust5 r4,r5,r5, 5,8
+	 l.sw 20(r3),r4
+	 l.cust5 r4,r5,r5, 6,8
+	 l.sw 24(r3),r4
+	 l.cust5 r4,r5,r5, 7,8
+	 l.sw 28(r3),r4
+	 l.cust5 r4,r5,r5, 8,8
+	 l.sw 32(r3),r4
+	 l.cust5 r4,r5,r5, 9,8
+	 l.sw 36(r3),r4
+	 l.cust5 r4,r5,r5,10,8
+	 l.sw 40(r3),r4
+	 l.cust5 r4,r5,r5,11,8
+	 l.sw 44(r3),r4
+	 l.cust5 r4,r5,r5,12,8
+	 l.sw 48(r3),r4
+	 l.cust5 r4,r5,r5,13,8
+	 l.sw 52(r3),r4
+	 l.cust5 r4,r5,r5,14,8
+	 l.sw 56(r3),r4
+	 l.cust5 r4,r5,r5,15,8
+	 l.sw 60(r3),r4
 	 
 # 0 "" 2
 #NO_APP
 	l.sw    	-64(r2),r14	 # SI store
+	l.movhi  	r3,hi(.LC11)
+	l.ori   	r3,r3,lo(.LC11)
+	l.lwz   	r4,-64(r2)	 # SI load
+	l.sw    	0(r1),r4	 # SI store
+	l.jal   	printf
+	l.nop			# nop delay slot
 	l.lwz   	r3,-52(r2)	 # SI load
 	l.lwz   	r3,0(r3)	 # SI load
 	l.sw    	-72(r2),r3	 # SI store
-	l.movhi  	r3,hi(.LC11)
-	l.ori   	r3,r3,lo(.LC11)
-	l.jal   	puts
-	l.nop			# nop delay slot
 	l.movhi  	r3,hi(.LC12)
 	l.ori   	r3,r3,lo(.LC12)
 	l.jal   	puts
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC11)
-	l.ori   	r3,r3,lo(.LC11)
+	l.movhi  	r3,hi(.LC13)
+	l.ori   	r3,r3,lo(.LC13)
+	l.jal   	puts
+	l.nop			# nop delay slot
+	l.movhi  	r3,hi(.LC12)
+	l.ori   	r3,r3,lo(.LC12)
 	l.jal   	puts
 	l.nop			# nop delay slot
 	l.addi  	r3,r0,0	 # move immediate I
@@ -526,8 +538,8 @@ main:
 	l.j     	.L12
 	l.nop			# nop delay slot
 .L13:
-	l.movhi  	r3,hi(.LC13)
-	l.ori   	r3,r3,lo(.LC13)
+	l.movhi  	r3,hi(.LC14)
+	l.ori   	r3,r3,lo(.LC14)
 	l.lwz   	r4,-16(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.ori   	r5,r4,0	 # move reg to reg
@@ -538,8 +550,8 @@ main:
 	l.sw    	4(r1),r4	 # SI store
 	l.jal   	printf
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC14)
-	l.ori   	r3,r3,lo(.LC14)
+	l.movhi  	r3,hi(.LC15)
+	l.ori   	r3,r3,lo(.LC15)
 	l.lwz   	r4,-16(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.ori   	r5,r4,0	 # move reg to reg
@@ -560,16 +572,16 @@ main:
 	l.sfltu 	r4,r3
 	l.bf	.L13
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC11)
-	l.ori   	r3,r3,lo(.LC11)
+	l.movhi  	r3,hi(.LC12)
+	l.ori   	r3,r3,lo(.LC12)
 	l.jal   	puts
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC15)
-	l.ori   	r3,r3,lo(.LC15)
+	l.movhi  	r3,hi(.LC16)
+	l.ori   	r3,r3,lo(.LC16)
 	l.jal   	puts
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC11)
-	l.ori   	r3,r3,lo(.LC11)
+	l.movhi  	r3,hi(.LC12)
+	l.ori   	r3,r3,lo(.LC12)
 	l.jal   	puts
 	l.nop			# nop delay slot
 	l.addi  	r3,r0,0	 # move immediate I
@@ -577,8 +589,8 @@ main:
 	l.j     	.L14
 	l.nop			# nop delay slot
 .L15:
-	l.movhi  	r3,hi(.LC16)
-	l.ori   	r3,r3,lo(.LC16)
+	l.movhi  	r3,hi(.LC17)
+	l.ori   	r3,r3,lo(.LC17)
 	l.lwz   	r4,-16(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.lwz   	r5,-48(r2)	 # SI load
@@ -588,8 +600,8 @@ main:
 	l.sw    	4(r1),r4	 # SI store
 	l.jal   	printf
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC13)
-	l.ori   	r3,r3,lo(.LC13)
+	l.movhi  	r3,hi(.LC14)
+	l.ori   	r3,r3,lo(.LC14)
 	l.lwz   	r4,-16(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.lwz   	r5,-48(r2)	 # SI load
@@ -608,8 +620,8 @@ main:
 	l.sflesi	r3,15
 	l.bf	.L15
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC11)
-	l.ori   	r3,r3,lo(.LC11)
+	l.movhi  	r3,hi(.LC12)
+	l.ori   	r3,r3,lo(.LC12)
 	l.jal   	puts
 	l.nop			# nop delay slot
 	l.lwz   	r3,-32(r2)	 # SI load
