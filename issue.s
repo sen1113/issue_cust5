@@ -326,7 +326,9 @@ main:
 	l.lwz   	r4,-68(r2)	 # SI load
 #APP
 # 100 "issue.c" 1
-	l.lwz r14,0(r3);l.cust5 r4,r14,r3,0,4;
+	l.lwz r14,0(r3)
+	l.cust5 r4,r14,r3,0,4
+	
 # 0 "" 2
 #NO_APP
 	l.sw    	-20(r2),r14	 # SI store
@@ -352,7 +354,8 @@ main:
 #APP
 # 109 "issue.c" 1
 	l.lwz r14,0(r3)
-	l.cust5 r4,r14,r3,0,2;
+	l.cust5 r4,r14,r3,0,2
+	
 # 0 "" 2
 #NO_APP
 	l.sw    	-20(r2),r14	 # SI store
@@ -377,7 +380,9 @@ main:
 	l.lwz   	r4,-68(r2)	 # SI load
 #APP
 # 118 "issue.c" 1
-	l.lwz r14,0(r3);l.cust5 r4,r14,r3,0,1;
+	l.lwz r14,0(r3)
+	l.cust5 r4,r14,r3,0,1
+	
 # 0 "" 2
 #NO_APP
 	l.sw    	-20(r2),r14	 # SI store
@@ -405,7 +410,99 @@ main:
 	l.lwz   	r5,-68(r2)	 # SI load
 #APP
 # 134 "issue.c" 1
-	l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.cust5 r14,r5,r5, 0,8; l.sw 0(r3),r14; l.cust5 r14,r5,r5, 1,8; l.sw 4(r3),r14; l.cust5 r14,r5,r5, 2,8; l.sw 8(r3),r14; l.cust5 r14,r5,r5, 3,8; l.sw 12(r3),r14; l.cust5 r14,r5,r5, 4,8; l.sw 16(r3),r14; l.cust5 r14,r5,r5, 5,8; l.sw 20(r3),r14; l.cust5 r14,r5,r5, 6,8; l.sw 24(r3),r14; l.cust5 r14,r5,r5, 7,8; l.sw 28(r3),r14; l.cust5 r14,r5,r5, 8,8; l.sw 32(r3),r14; l.cust5 r14,r5,r5, 9,8; l.sw 36(r3),r14; l.cust5 r14,r5,r5,10,8; l.sw 40(r3),r14; l.cust5 r14,r5,r5,11,8; l.sw 44(r3),r14; l.cust5 r14,r5,r5,12,8; l.sw 48(r3),r14; l.cust5 r14,r5,r5,13,8; l.sw 52(r3),r14; l.cust5 r14,r5,r5,14,8; l.sw 56(r3),r14; l.cust5 r14,r5,r5,15,8; l.sw 60(r3),r14; 
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.nop 0
+	l.cust5 r14,r5,r5, 0,8
+	 l.sw 0(r3),r14
+	 l.cust5 r14,r5,r5, 1,8
+	 l.sw 4(r3),r14
+	 l.cust5 r14,r5,r5, 2,8
+	 l.sw 8(r3),r14
+	 l.cust5 r14,r5,r5, 3,8
+	 l.sw 12(r3),r14
+	 l.cust5 r14,r5,r5, 4,8
+	 l.sw 16(r3),r14
+	 l.cust5 r14,r5,r5, 5,8
+	 l.sw 20(r3),r14
+	 l.cust5 r14,r5,r5, 6,8
+	 l.sw 24(r3),r14
+	 l.cust5 r14,r5,r5, 7,8
+	 l.sw 28(r3),r14
+	 l.cust5 r14,r5,r5, 8,8
+	 l.sw 32(r3),r14
+	 l.cust5 r14,r5,r5, 9,8
+	 l.sw 36(r3),r14
+	 l.cust5 r14,r5,r5,10,8
+	 l.sw 40(r3),r14
+	 l.cust5 r14,r5,r5,11,8
+	 l.sw 44(r3),r14
+	 l.cust5 r14,r5,r5,12,8
+	 l.sw 48(r3),r14
+	 l.cust5 r14,r5,r5,13,8
+	 l.sw 52(r3),r14
+	 l.cust5 r14,r5,r5,14,8
+	 l.sw 56(r3),r14
+	 l.cust5 r14,r5,r5,15,8
+	 l.sw 60(r3),r14
+	 
 # 0 "" 2
 #NO_APP
 	l.sw    	-64(r2),r14	 # SI store

@@ -98,8 +98,8 @@ int main(int argc, char **argv){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
     if (i == 0){
       __asm__(
-	"l.lwz %0,0(%1);"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,4;"	//start
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,4\n\t"	//start
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
@@ -108,7 +108,7 @@ int main(int argc, char **argv){
     else if(i < max-1){
       __asm__(
 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,2;"	//middle
+  	"l.cust5 %2,%0,%1,0,2\n\t"	//middle
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
@@ -116,8 +116,8 @@ int main(int argc, char **argv){
     }
     else if(i == max-1){
       __asm__(
-	"l.lwz %0,0(%1);"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,1;"	//end
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,1\n\t"	//end
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
@@ -132,28 +132,28 @@ int main(int argc, char **argv){
 /*   //l.sw 0,target_addr,hash32,0; */
 
   __asm__(
-	  "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;l.nop 0;"
-	  "l.cust5 %0,%3,%3, 0,8; l.sw 0(%1),%0; "//store
-	  "l.cust5 %0,%3,%3, 1,8; l.sw 4(%1),%0; "
-	  "l.cust5 %0,%3,%3, 2,8; l.sw 8(%1),%0; "
-	  "l.cust5 %0,%3,%3, 3,8; l.sw 12(%1),%0; "
-	  "l.cust5 %0,%3,%3, 4,8; l.sw 16(%1),%0; "
-	  "l.cust5 %0,%3,%3, 5,8; l.sw 20(%1),%0; "
-	  "l.cust5 %0,%3,%3, 6,8; l.sw 24(%1),%0; "
-	  "l.cust5 %0,%3,%3, 7,8; l.sw 28(%1),%0; "
-	  "l.cust5 %0,%3,%3, 8,8; l.sw 32(%1),%0; "
-	  "l.cust5 %0,%3,%3, 9,8; l.sw 36(%1),%0; "
-	  "l.cust5 %0,%3,%3,10,8; l.sw 40(%1),%0; "
-	  "l.cust5 %0,%3,%3,11,8; l.sw 44(%1),%0; "
-	  "l.cust5 %0,%3,%3,12,8; l.sw 48(%1),%0; "
-	  "l.cust5 %0,%3,%3,13,8; l.sw 52(%1),%0; "
-	  "l.cust5 %0,%3,%3,14,8; l.sw 56(%1),%0; "
-	  "l.cust5 %0,%3,%3,15,8; l.sw 60(%1),%0; "
+	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
+	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
+	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
+	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
+	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
+	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t"
+	  "l.cust5 %0,%3,%3, 0,8\n\t l.sw 0(%1),%0\n\t "//store
+	  "l.cust5 %0,%3,%3, 1,8\n\t l.sw 4(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 2,8\n\t l.sw 8(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 3,8\n\t l.sw 12(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 4,8\n\t l.sw 16(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 5,8\n\t l.sw 20(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 6,8\n\t l.sw 24(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 7,8\n\t l.sw 28(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 8,8\n\t l.sw 32(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3, 9,8\n\t l.sw 36(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3,10,8\n\t l.sw 40(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3,11,8\n\t l.sw 44(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3,12,8\n\t l.sw 48(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3,13,8\n\t l.sw 52(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3,14,8\n\t l.sw 56(%1),%0\n\t "
+	  "l.cust5 %0,%3,%3,15,8\n\t l.sw 60(%1),%0\n\t "
 	  :"=r"(hash32)
 	  :"r"(target_addr),"r"(tmp),"r"(dummy)
 	  :
