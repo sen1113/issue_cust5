@@ -93,87 +93,85 @@ int main(int argc, char **argv){
   unsigned long tmp = 0;
   unsigned long dummy = 0;
 
-/*   //input */
-/*   for(i = 0; i <= max-1; i++){ */
-/*    input_addr = str1->top_addr + 4*i;//generate next input_addr */
-/*     if (i == 0){ */
-/*       __asm__( */
-/* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-/*   	"l.cust5 %2,%0,%1,0,4\n\t"	//start */
-/*   	:"=r"(tmp) */
-/*   	:"r"(input_addr),"r"(dummy) */
-/* 	: */
-/*   	      ); printf("%d\t %08lx\n",i,tmp); */
-/*     } */
-/*     else if(i < max-1){ */
-/*       __asm__( */
-/* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-/*   	"l.cust5 %2,%0,%1,0,2\n\t"	//middle */
-/*   	:"=r"(tmp) */
-/*   	:"r"(input_addr),"r"(dummy) */
-/* 	: */
-/*   	      );  printf("%d\t %08lx\n",i,tmp); */
-/*     } */
-/*     else if(i == max-1){ */
-/*       __asm__( */
-/* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-/*   	"l.cust5 %2,%0,%1,0,1\n\t"	//end */
-/*   	:"=r"(tmp) */
-/*   	:"r"(input_addr),"r"(dummy) */
-/* 	: */
-/*   	      ); printf("%d\t %08lx\n",i,tmp); */
-/*     } */
-/*   }//End of "for" loop */
+  //input
+  for(i = 0; i <= max-1; i++){
+   input_addr = str1->top_addr + 4*i;//generate next input_addr
+    if (i == 0){
+      __asm__(
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,4\n\t"	//start
+  	:"=r"(tmp)
+  	:"r"(input_addr),"r"(dummy)
+	:
+  	      ); printf("%d\t %08lx\n",i,tmp);
+    }
+    else if(i < max-1){
+      __asm__(
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,2\n\t"	//middle
+  	:"=r"(tmp)
+  	:"r"(input_addr),"r"(dummy)
+	:
+  	      );  printf("%d\t %08lx\n",i,tmp);
+    }
+    else if(i == max-1){
+      __asm__(
+	"l.lwz %0,0(%2)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %3,%0,%2,0,1\n\t"	//end
 
-/*   sleep(10); */
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 
-/* /\*   //devide ; output ;rotate *\/ */
-/* /\*   //l.cust5 hash32 XX,XX, hash_num,storemode *\/ */
-/* /\*   //l.sw 0,target_addr,hash32,0; *\/ */
+"l.cust5 %1,%3,%3,15,8\n\t l.sw 0(%4),%1\n\t"
+  	:"=r"(tmp),"r"(hash32)
+  	:"r"(input_addr),"r"(dummy),"r"(target_addr)
+	:
+  	      ); printf("%d\t %08lx\n",i,tmp);
+    }
+  }//End of "for" loop
 
-/*   __asm__( */
-/* 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t" */
-/* 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t" */
-/* 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t" */
-/* 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t" */
-/* 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t" */
-/* 	  "l.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\tl.nop 0\n\t" */
-/* 	  "l.cust5 %0, %3,%3,15,8\n\t" */
-/* 	  "l.cust5 %2,%3,%3, 0,8\n\t l.sw 0(%1),%2\n\t "//store */
-/* 	  "l.cust5 %2,%3,%3, 1,8\n\t l.sw 4(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 2,8\n\t l.sw 8(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 3,8\n\t l.sw 12(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 4,8\n\t l.sw 16(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 5,8\n\t l.sw 20(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 6,8\n\t l.sw 24(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 7,8\n\t l.sw 28(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 8,8\n\t l.sw 32(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3, 9,8\n\t l.sw 36(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3,10,8\n\t l.sw 40(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3,11,8\n\t l.sw 44(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3,12,8\n\t l.sw 48(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3,13,8\n\t l.sw 52(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3,14,8\n\t l.sw 56(%1),%2\n\t " */
-/* 	  "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t " */
-/* 	  :"=r"(hash32) */
-/* 	  :"r"(target_addr),"r"(tmp),"r"(dummy) */
-/* 	  :"memory" */
-/* 	  ); */
-/*   printf("hash32:%08lx\n",hash32); */
+  sleep(10);
+
+/*   //devide ; output ;rotate */
+/*   //l.cust5 hash32 XX,XX, hash_num,storemode */
+/*   //l.sw 0,target_addr,hash32,0; */
+
+  __asm__(
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.cust5 %0, %3,%3,15,8\n\t"
+	  "l.cust5 %2,%3,%3, 0,8\n\t l.sw 0(%1),%2\n\t "//store
+	  "l.cust5 %2,%3,%3, 1,8\n\t l.sw 4(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 2,8\n\t l.sw 8(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 3,8\n\t l.sw 12(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 4,8\n\t l.sw 16(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 5,8\n\t l.sw 20(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 6,8\n\t l.sw 24(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 7,8\n\t l.sw 28(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 8,8\n\t l.sw 32(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3, 9,8\n\t l.sw 36(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3,10,8\n\t l.sw 40(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3,11,8\n\t l.sw 44(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3,12,8\n\t l.sw 48(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3,13,8\n\t l.sw 52(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3,14,8\n\t l.sw 56(%1),%2\n\t "
+	  "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t "
+	  :"=r"(hash32)
+	  :"r"(target_addr),"r"(tmp),"r"(dummy)
+	  :"memory"
+	  );
+  printf("hash32:%08lx\n",hash32);
 
 
 //test
-
-  int one = 10;
-  __asm__(
-	  "l.nop\n\t"
-	  "l.addi %0,%1,0 \n\t"
-	  "l.nop 0\n\t"
-	  "l.sw 0(%2),%0\n\t"
-	  :"=r"(hash32)
-	  :"r"(one),"r"(target_addr)
-	  :
-	  );printf("%ld\n",hash32);
 
   input_addr = str1 -> top_addr;// input_addr set again
   //target_addr = target_addr -12;// target_addr set again
