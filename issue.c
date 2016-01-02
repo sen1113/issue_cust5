@@ -126,7 +126,7 @@ int main(int argc, char **argv){
 	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 
-"l.cust5 %1,%3,%3,15,8\n\t l.sw 0(%4),%1\n\t"
+"l.cust5 %1,%3,%3,0,8\n\t l.sw 0(%4),%1\n\t"
   	:"=r"(tmp),"=r"(hash32)
   	:"r"(input_addr),"r"(dummy),"r"(target_addr)
 	:
