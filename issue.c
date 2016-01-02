@@ -164,7 +164,7 @@ int main(int argc, char **argv){
 
 //test
 
-  int one = 1;
+  int one = 16;
   __asm__(
 	  "l.nop\n\t"
 	  "l.addi %0,%1,0 \n\t"
