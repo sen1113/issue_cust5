@@ -131,6 +131,29 @@ int main(int argc, char **argv){
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
 /*   //l.sw 0,target_addr,hash32,0; */
 
+
+  unsigned long tmp1 = 0;
+  unsigned long tmp2 = 0;
+ unsigned long tmp3 = 0;
+ unsigned long tmp4 = 0;
+ unsigned long tmp5 = 0;
+ unsigned long tmp6 = 0;
+ unsigned long tmp7 = 0;
+ unsigned long tmp8 = 0;
+ unsigned long tmp9 = 0;
+ unsigned long tmp10 = 0;
+ unsigned long tmp11 = 0;
+ unsigned long tmp12 = 0;
+ unsigned long tmp13 = 0;
+ unsigned long tmp14 = 0;
+ unsigned long tmp15 = 0;
+ unsigned long tmp16 = 0;
+
+
+
+
+
+
   __asm__(
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
