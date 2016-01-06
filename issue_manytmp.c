@@ -157,22 +157,12 @@ int main(int argc, char **argv){
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  /* "l.cust5 %2,%3,%3, 0,8\n\t l.sw 0(%1),%2\n\t "//store */
-  	  /* "l.cust5 %2,%3,%3, 1,8\n\t l.sw 4(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 2,8\n\t l.sw 8(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 3,8\n\t l.sw 12(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 4,8\n\t l.sw 16(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 5,8\n\t l.sw 20(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 6,8\n\t l.sw 24(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 7,8\n\t l.sw 28(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 8,8\n\t l.sw 32(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 9,8\n\t l.sw 36(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,10,8\n\t l.sw 40(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,11,8\n\t l.sw 44(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,12,8\n\t l.sw 48(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,13,8\n\t l.sw 52(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,14,8\n\t l.sw 56(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t " */
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 	  "l.cust5 %1,%18,%18, 0,8\n\t"
   	  "l.cust5 %2,%18,%18, 1,8\n\t"
   	  "l.cust5 %3,%18,%18, 2,8\n\t"
@@ -209,22 +199,22 @@ int main(int argc, char **argv){
   	  :"r"(target_addr),"r"(dummy)
   	  :"memory"
   	  );
-  printf("tmp1:%ld\n",tmp1);
-  printf("tmp2:%ld\n",tmp2);
-  printf("tmp3:%ld\n",tmp3);
-  printf("tmp4:%ld\n",tmp4);
-  printf("tmp5:%ld\n",tmp5);
-  printf("tmp6:%ld\n",tmp6);
-  printf("tmp7:%ld\n",tmp7);
-  printf("tmp8:%ld\n",tmp8);
-  printf("tmp9:%ld\n",tmp9);
-  printf("tmp10:%ld\n",tmp10);
-  printf("tmp11:%ld\n",tmp11);
-  printf("tmp12:%ld\n",tmp12);
-  printf("tmp13:%ld\n",tmp13);
-  printf("tmp14:%ld\n",tmp14);
-  printf("tmp15:%ld\n",tmp15);
-  printf("tmp16:%ld\n",tmp16);
+  printf("tmp1:%08lx\n",tmp1);
+  printf("tmp2:%08lx\n",tmp2);
+  printf("tmp3:%08lx\n",tmp3);
+  printf("tmp4:%08lx\n",tmp4);
+  printf("tmp5:%08lx\n",tmp5);
+  printf("tmp6:%08lx\n",tmp6);
+  printf("tmp7:%08lx\n",tmp7);
+  printf("tmp8:%08lx\n",tmp8);
+  printf("tmp9:%08lx\n",tmp9);
+  printf("tmp10:%08lx\n",tmp10);
+  printf("tmp11:%08lx\n",tmp11);
+  printf("tmp12:%08lx\n",tmp12);
+  printf("tmp13:%08lx\n",tmp13);
+  printf("tmp14:%08lx\n",tmp14);
+  printf("tmp15:%08lx\n",tmp15);
+  printf("tmp16:%08lx\n",tmp16);
 //test
 
   input_addr = str1 -> top_addr;// input_addr set again
@@ -243,8 +233,7 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK output 512bit hash...\n");
   printf("----------------------------------\n");
   for(i=0;i<16;i++){
-    printf("%d:%p\n",i,(target_addr+i));//addr
-    printf("%d:%08lx\n",i,*(target_addr+i));//content
+    printf("%d\t %p:%08lx\n",i,(target_addr+i),*(target_addr+i));//addr:content
   }
   printf("----------------------------------\n");
 
