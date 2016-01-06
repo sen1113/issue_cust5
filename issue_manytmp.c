@@ -131,6 +131,25 @@ int main(int argc, char **argv){
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
 /*   //l.sw 0,target_addr,hash32,0; */
 
+
+  unsigned long tmp1  = 0;
+  unsigned long tmp2  = 0;
+  unsigned long tmp3  = 0;
+  unsigned long tmp4  = 0;
+  unsigned long tmp5  = 0;
+  unsigned long tmp6  = 0;
+  unsigned long tmp7  = 0;
+  unsigned long tmp8  = 0;
+  unsigned long tmp9  = 0;
+  unsigned long tmp10 = 0;
+  unsigned long tmp11 = 0;
+  unsigned long tmp12 = 0;
+  unsigned long tmp13 = 0;
+  unsigned long tmp14 = 0;
+  unsigned long tmp15 = 0;
+  unsigned long tmp16 = 0;
+
+
   __asm__(
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
@@ -154,42 +173,47 @@ int main(int argc, char **argv){
   	  /* "l.cust5 %2,%3,%3,13,8\n\t l.sw 52(%1),%2\n\t " */
   	  /* "l.cust5 %2,%3,%3,14,8\n\t l.sw 56(%1),%2\n\t " */
   	  /* "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t " */
-	  "l.cust5 %2,%3,%3, 0,8\n\t"
-  	  "l.cust5 %2,%3,%3, 1,8\n\t"
-  	  "l.cust5 %2,%3,%3, 2,8\n\t"
-  	  "l.cust5 %2,%3,%3, 3,8\n\t"
-  	  "l.cust5 %2,%3,%3, 4,8\n\t"
-  	  "l.cust5 %2,%3,%3, 5,8\n\t"
-  	  "l.cust5 %2,%3,%3, 6,8\n\t"
-  	  "l.cust5 %2,%3,%3, 7,8\n\t"
-  	  "l.cust5 %2,%3,%3, 8,8\n\t"
-  	  "l.cust5 %2,%3,%3, 9,8\n\t"
-  	  "l.cust5 %2,%3,%3,10,8\n\t"
-  	  "l.cust5 %2,%3,%3,11,8\n\t"
-  	  "l.cust5 %2,%3,%3,12,8\n\t"
-  	  "l.cust5 %2,%3,%3,13,8\n\t"
-  	  "l.cust5 %2,%3,%3,14,8\n\t"
-  	  "l.cust5 %2,%3,%3,15,8\n\t"
-	  "l.sw 0(%1),%2\n\t"
-	  "l.sw 4(%1),%2\n\t"
-	  "l.sw 8(%1),%2\n\t"
-	  "l.sw 12(%1),%2\n\t"
-	  "l.sw 16(%1),%2\n\t"
-	  "l.sw 20(%1),%2\n\t"
-	  "l.sw 24(%1),%2\n\t"
-	  "l.sw 28(%1),%2\n\t"
-	  "l.sw 32(%1),%2\n\t"
-	  "l.sw 36(%1),%2\n\t"
-	  "l.sw 40(%1),%2\n\t"
-	  "l.sw 44(%1),%2\n\t"
-	  "l.sw 48(%1),%2\n\t"
-	  "l.sw 52(%1),%2\n\t"
-	  "l.sw 56(%1),%2\n\t"
-	  "l.sw 60(%1),%2\n\t"
-  	  :"=r"(hash32)
-  	  :"r"(target_addr),"r"(tmp),"r"(dummy)
+	  "l.cust5 %1,%18,%18, 0,8\n\t"
+  	  "l.cust5 %2,%18,%18, 1,8\n\t"
+  	  "l.cust5 %3,%18,%18, 2,8\n\t"
+  	  "l.cust5 %4,%18,%18, 3,8\n\t"
+  	  "l.cust5 %5,%18,%18, 4,8\n\t"
+  	  "l.cust5 %6,%18,%18, 5,8\n\t"
+  	  "l.cust5 %7,%18,%18, 6,8\n\t"
+  	  "l.cust5 %8,%18,%18, 7,8\n\t"
+  	  "l.cust5 %9,%18,%18, 8,8\n\t"
+  	  "l.cust5 %10,%18,%18, 9,8\n\t"
+  	  "l.cust5 %11,%18,%18,10,8\n\t"
+  	  "l.cust5 %12,%18,%18,11,8\n\t"
+  	  "l.cust5 %13,%18,%18,12,8\n\t"
+  	  "l.cust5 %14,%18,%18,13,8\n\t"
+  	  "l.cust5 %15,%18,%18,14,8\n\t"
+  	  "l.cust5 %16,%18,%18,15,8\n\t"
+	  "l.sw 0(%17),%1\n\t"
+	  "l.sw 4(%17),%2\n\t"
+	  "l.sw 8(%17),%3\n\t"
+	  "l.sw 12(%17),%4\n\t"
+	  "l.sw 16(%17),%5\n\t"
+	  "l.sw 20(%17),%6\n\t"
+	  "l.sw 24(%17),%7\n\t"
+	  "l.sw 28(%17),%8\n\t"
+	  "l.sw 32(%17),%9\n\t"
+	  "l.sw 36(%17),%10\n\t"
+	  "l.sw 40(%17),%11\n\t"
+	  "l.sw 44(%17),%12\n\t"
+	  "l.sw 48(%17),%13\n\t"
+	  "l.sw 52(%17),%14\n\t"
+	  "l.sw 56(%17),%15\n\t"
+	  "l.sw 60(%17),%16\n\t"
+  	  :"=r"(hash32),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
+  	  :"r"(target_addr),"r"(dummy)
   	  :"memory"
   	  );
+  printf("tmp1:%ld\n",tmp1);
+  printf("tmp2:%ld\n",tmp2);
+  printf("tmp3:%ld\n",tmp3);
+  
+
 //test
 
   input_addr = str1 -> top_addr;// input_addr set again
