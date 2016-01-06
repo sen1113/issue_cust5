@@ -138,54 +138,22 @@ int main(int argc, char **argv){
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  /* "l.cust5 %2,%3,%3, 0,8\n\t l.sw 0(%1),%2\n\t "//store */
-  	  /* "l.cust5 %2,%3,%3, 1,8\n\t l.sw 4(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 2,8\n\t l.sw 8(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 3,8\n\t l.sw 12(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 4,8\n\t l.sw 16(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 5,8\n\t l.sw 20(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 6,8\n\t l.sw 24(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 7,8\n\t l.sw 28(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 8,8\n\t l.sw 32(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3, 9,8\n\t l.sw 36(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,10,8\n\t l.sw 40(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,11,8\n\t l.sw 44(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,12,8\n\t l.sw 48(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,13,8\n\t l.sw 52(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,14,8\n\t l.sw 56(%1),%2\n\t " */
-  	  /* "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t " */
-	  "l.cust5 %2,%3,%3, 0,8\n\t"
-  	  "l.cust5 %2,%3,%3, 1,8\n\t"
-  	  "l.cust5 %2,%3,%3, 2,8\n\t"
-  	  "l.cust5 %2,%3,%3, 3,8\n\t"
-  	  "l.cust5 %2,%3,%3, 4,8\n\t"
-  	  "l.cust5 %2,%3,%3, 5,8\n\t"
-  	  "l.cust5 %2,%3,%3, 6,8\n\t"
-  	  "l.cust5 %2,%3,%3, 7,8\n\t"
-  	  "l.cust5 %2,%3,%3, 8,8\n\t"
-  	  "l.cust5 %2,%3,%3, 9,8\n\t"
-  	  "l.cust5 %2,%3,%3,10,8\n\t"
-  	  "l.cust5 %2,%3,%3,11,8\n\t"
-  	  "l.cust5 %2,%3,%3,12,8\n\t"
-  	  "l.cust5 %2,%3,%3,13,8\n\t"
-  	  "l.cust5 %2,%3,%3,14,8\n\t"
-  	  "l.cust5 %2,%3,%3,15,8\n\t"
-	  "l.sw 0(%1),%2\n\t"
-	  "l.sw 4(%1),%2\n\t"
-	  "l.sw 8(%1),%2\n\t"
-	  "l.sw 12(%1),%2\n\t"
-	  "l.sw 16(%1),%2\n\t"
-	  "l.sw 20(%1),%2\n\t"
-	  "l.sw 24(%1),%2\n\t"
-	  "l.sw 28(%1),%2\n\t"
-	  "l.sw 32(%1),%2\n\t"
-	  "l.sw 36(%1),%2\n\t"
-	  "l.sw 40(%1),%2\n\t"
-	  "l.sw 44(%1),%2\n\t"
-	  "l.sw 48(%1),%2\n\t"
-	  "l.sw 52(%1),%2\n\t"
-	  "l.sw 56(%1),%2\n\t"
-	  "l.sw 60(%1),%2\n\t"
+  	  "l.cust5 %2,%3,%3, 0,8\n\t l.sw 0(%1),%2\n\t "//store
+  	  "l.cust5 %2,%3,%3, 1,8\n\t l.sw 4(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 2,8\n\t l.sw 8(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 3,8\n\t l.sw 12(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 4,8\n\t l.sw 16(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 5,8\n\t l.sw 20(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 6,8\n\t l.sw 24(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 7,8\n\t l.sw 28(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 8,8\n\t l.sw 32(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3, 9,8\n\t l.sw 36(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3,10,8\n\t l.sw 40(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3,11,8\n\t l.sw 44(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3,12,8\n\t l.sw 48(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3,13,8\n\t l.sw 52(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3,14,8\n\t l.sw 56(%1),%2\n\t "
+  	  "l.cust5 %2,%3,%3,15,8\n\t l.sw 60(%1),%2\n\t "
   	  :"=r"(hash32)
   	  :"r"(target_addr),"r"(tmp),"r"(dummy)
   	  :"memory"
