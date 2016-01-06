@@ -212,8 +212,19 @@ int main(int argc, char **argv){
   printf("tmp1:%ld\n",tmp1);
   printf("tmp2:%ld\n",tmp2);
   printf("tmp3:%ld\n",tmp3);
-  
-
+  printf("tmp4:%ld\n",tmp4);
+  printf("tmp5:%ld\n",tmp5);
+  printf("tmp6:%ld\n",tmp6);
+  printf("tmp7:%ld\n",tmp7);
+  printf("tmp8:%ld\n",tmp8);
+  printf("tmp9:%ld\n",tmp9);
+  printf("tmp10:%ld\n",tmp10);
+  printf("tmp11:%ld\n",tmp11);
+  printf("tmp12:%ld\n",tmp12);
+  printf("tmp13:%ld\n",tmp13);
+  printf("tmp14:%ld\n",tmp14);
+  printf("tmp15:%ld\n",tmp15);
+  printf("tmp16:%ld\n",tmp16);
 //test
 
   input_addr = str1 -> top_addr;// input_addr set again
