@@ -229,8 +229,7 @@ int main(int argc, char **argv){
   printf("SHA-3:KECCAK output 512bit hash...\n");
   printf("----------------------------------\n");
   for(i=0;i<16;i++){
-    printf("%d:%p\n",i,(target_addr+i));//addr
-    printf("%d:%08lx\n",i,*(target_addr+i));//content
+    printf("%d:\t%p  %08lx\n",i,(target_addr+i),*(target_addr+i));//addr & contents
   }
   printf("----------------------------------\n");
 
