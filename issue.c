@@ -98,8 +98,8 @@ int main(int argc, char **argv){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
     if (i == 0){
       __asm__(
-	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,4\n\t"	//start
+	"l.lwz %2,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %0,%2,%1,0,4\n\t"	//start
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
@@ -107,8 +107,8 @@ int main(int argc, char **argv){
     }
     else if(i < max-1){
       __asm__(
-	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,2\n\t"	//middle
+	"l.lwz %2,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %0,%2,%1,0,2\n\t"	//middle
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
@@ -116,8 +116,8 @@ int main(int argc, char **argv){
     }
     else if(i == max-1){
       __asm__(
-	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,1\n\t"	//end
+	"l.lwz %2,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %0,%2,%1,0,1\n\t"	//end
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
