@@ -91,6 +91,7 @@ int main(int argc, char **argv){
   int store_en = 0;
   unsigned long hash32 = 0;
   unsigned long tmp = 0;
+  unsigned long tmp0 = 0;
   unsigned long dummy = 0;
 
   //input
@@ -98,8 +99,8 @@ int main(int argc, char **argv){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
     if (i == 0){
       __asm__(
-	"l.lwz %2,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %0,%2,%1,0,4\n\t"	//start
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,4\n\t"	//start
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
@@ -107,17 +108,17 @@ int main(int argc, char **argv){
     }
     else if(i < max-1){
       __asm__(
-	"l.lwz %2,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %0,%2,%1,0,2\n\t"	//middle
-  	:"=r"(tmp)
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,2\n\t"	//middle
+  	:"=r"(tmp0)
   	:"r"(input_addr),"r"(dummy)
 	:
   	      );  printf("%d\t %08lx\n",i,tmp);
     }
     else if(i == max-1){
       __asm__(
-	"l.lwz %2,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %0,%2,%1,0,1\n\t"	//end
+	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%1,0,1\n\t"	//end
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
