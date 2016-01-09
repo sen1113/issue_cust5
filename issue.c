@@ -91,7 +91,6 @@ int main(int argc, char **argv){
   int store_en = 0;
   unsigned long hash32 = 0;
   unsigned long tmp = 0;
-  unsigned long tmp0 = 0;
   unsigned long dummy = 0;
 
   //input
@@ -110,7 +109,7 @@ int main(int argc, char **argv){
       __asm__(
 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
   	"l.cust5 %2,%0,%1,0,2\n\t"	//middle
-  	:"=r"(tmp0)
+  	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy)
 	:
   	      );  printf("%d\t %08lx\n",i,tmp);
