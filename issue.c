@@ -91,7 +91,8 @@ int main(int argc, char **argv){
   int store_en = 0;
   unsigned long hash32 = 0;
   unsigned long tmp = 0;
-  unsigned long dummy = 0;
+  unsigned long dummy1 = 0;
+  unsigned long dummy2 = 0;
 
   //input
   for(i = 0; i <= max-1; i++){
@@ -99,33 +100,33 @@ int main(int argc, char **argv){
     if (i == 0){
       __asm__(
 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,4\n\t"	//start
+  	"l.cust5 %2,%0,%3,0,4\n\t"	//start
   	:"=r"(tmp)
-  	:"r"(input_addr),"r"(dummy)
+  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	:
   	      ); printf("%d\t %08lx\n",i,tmp);
     }
     else if(i < max-1){
       __asm__(
 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,2\n\t"	//middle
+  	"l.cust5 %2,%0,%3,0,2\n\t"	//middle
   	:"=r"(tmp)
-  	:"r"(input_addr),"r"(dummy)
+  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	:
   	      );  printf("%d\t %08lx\n",i,tmp);
     }
     else if(i == max-1){
       __asm__(
 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%1,0,1\n\t"	//end
+  	"l.cust5 %2,%0,%3,0,1\n\t"	//end
   	:"=r"(tmp)
-  	:"r"(input_addr),"r"(dummy)
+  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	:
   	      ); printf("%d\t %08lx\n",i,tmp);
     }
   }//End of "for" loop
 
-  sleep(10);
+  //  sleep(10);
 
 /*   //devide ; output ;rotate */
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
@@ -149,26 +150,26 @@ int main(int argc, char **argv){
   unsigned long tmp16 = 0;
 
   __asm__(
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+  	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
 	  "l.cust5 %1,%18,%18, 15,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
@@ -217,7 +218,7 @@ int main(int argc, char **argv){
 	  "l.sw 56(%17),%15\n\t"
 	  "l.sw 60(%17),%16\n\t"
   	  :"=r"(hash32),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
-  	  :"r"(target_addr),"r"(dummy)
+  	  :"r"(target_addr),"r"(dummy1)
   	  :"memory"
   	  );
   printf("tmp1:%08lx\n",tmp1);
