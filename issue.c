@@ -94,6 +94,25 @@ int main(int argc, char **argv){
   unsigned long dummy1 = 0;
   unsigned long dummy2 = 0;
 
+
+  unsigned long tmp1  = 0;
+  unsigned long tmp2  = 0;
+  unsigned long tmp3  = 0;
+  unsigned long tmp4  = 0;
+  unsigned long tmp5  = 0;
+  unsigned long tmp6  = 0;
+  unsigned long tmp7  = 0;
+  unsigned long tmp8  = 0;
+  unsigned long tmp9  = 0;
+  unsigned long tmp10 = 0;
+  unsigned long tmp11 = 0;
+  unsigned long tmp12 = 0;
+  unsigned long tmp13 = 0;
+  unsigned long tmp14 = 0;
+  unsigned long tmp15 = 0;
+  unsigned long tmp16 = 0;
+
+
   //input
   for(i = 0; i <= max-1; i++){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
@@ -117,37 +136,34 @@ int main(int argc, char **argv){
     }
     else if(i == max-1){
       __asm__(
-	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%3,0,1\n\t"	//end
-  	:"=r"(tmp)
+	"l.lwz %0,0(%2)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %3,%0,%4,0,1\n\t"	//end
+	"l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	"l.cust5 %1,%3,%3, 15,8\n\t"
+	:"=r"(tmp),"=r"(tmp1)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	:
-  	      ); printf("%d\t %08lx\n",i,tmp);
+  	      ); printf("%d\t %08lx %08lx\n",i,tmp,tmp1);
     }
   }//End of "for" loop
+
+
+
+    /* else if(i == max-1){ */
+    /*   __asm__( */
+    /* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
+    /* 	"l.cust5 %2,%0,%3,0,1\n\t"	//end */
+    /* 	:"=r"(tmp) */
+    /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
+    /* 	: */
+    /* 	      ); printf("%d\t %08lx\n",i,tmp); */
+    /* } */
 
   //  sleep(10);
 
 /*   //devide ; output ;rotate */
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
 /*   //l.sw 0,target_addr,hash32,0; */
-
-  unsigned long tmp1  = 0;
-  unsigned long tmp2  = 0;
-  unsigned long tmp3  = 0;
-  unsigned long tmp4  = 0;
-  unsigned long tmp5  = 0;
-  unsigned long tmp6  = 0;
-  unsigned long tmp7  = 0;
-  unsigned long tmp8  = 0;
-  unsigned long tmp9  = 0;
-  unsigned long tmp10 = 0;
-  unsigned long tmp11 = 0;
-  unsigned long tmp12 = 0;
-  unsigned long tmp13 = 0;
-  unsigned long tmp14 = 0;
-  unsigned long tmp15 = 0;
-  unsigned long tmp16 = 0;
 
   __asm__(
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
