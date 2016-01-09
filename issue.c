@@ -170,7 +170,7 @@ int main(int argc, char **argv){
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
-	  "l.cust5 %1,%18,%18, 15,8\n\t"
+	  "l.cust5 %1,%19,%19, 15,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
@@ -218,7 +218,7 @@ int main(int argc, char **argv){
 	  "l.sw 56(%17),%15\n\t"
 	  "l.sw 60(%17),%16\n\t"
   	  :"=r"(hash32),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
-  	  :"r"(target_addr),"r"(dummy1)
+  	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
   	  :"memory"
   	  );
   printf("tmp1:%08lx\n",tmp1);
