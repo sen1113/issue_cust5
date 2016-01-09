@@ -170,7 +170,7 @@ int main(int argc, char **argv){
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
-	  "l.cust5 %1,%19,%19, 15,8\n\t"
+	  //"l.cust5 %1,%19,%19, 15,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
