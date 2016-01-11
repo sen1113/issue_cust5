@@ -113,7 +113,16 @@ int main(int argc, char **argv){
   unsigned long tmp16 = 0;
 
 
-  //input
+
+  //Initialize Keccak
+  __asm__(
+	  "l.cust5 %0,%0,%0,0,0\n\t"
+	  :
+	  :"r"(tmp)
+	  :
+	  );
+  printf("Initialize Keccak\n");
+  //Input
   for(i = 0; i <= max-1; i++){
    input_addr = str1->top_addr + 4*i;//generate next input_addr
     if (i == 0){
