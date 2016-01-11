@@ -136,28 +136,26 @@ int main(int argc, char **argv){
     }
     else if(i == max-1){
       __asm__(
-	"l.lwz %0,0(%2)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %3,%0,%4,0,1\n\t"	//end
-	"l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-	"l.cust5 %1,%3,%3, 15,8\n\t"
-	:"=r"(tmp),"=r"(tmp1)
-  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
-	:
-  	      ); printf("%d\t %08lx %08lx\n",i,tmp,tmp1);
+    	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+    	"l.cust5 %2,%0,%3,0,1\n\t"	//end
+    	:"=r"(tmp)
+    	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
+    	:
+    	      ); printf("%d\t %08lx\n",i,tmp);
     }
   }//End of "for" loop
 
 
 
-    /* else if(i == max-1){ */
-    /*   __asm__( */
-    /* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-    /* 	"l.cust5 %2,%0,%3,0,1\n\t"	//end */
-    /* 	:"=r"(tmp) */
-    /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
-    /* 	: */
-    /* 	      ); printf("%d\t %08lx\n",i,tmp); */
-    /* } */
+      /* __asm__( */
+      /* 	"l.lwz %0,0(%2)\n\t"//LOAD FROM input_addr to tmp */
+      /* 	"l.cust5 %3,%0,%4,0,1\n\t"	//end */
+      /* 	"l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
+      /* 	"l.cust5 %1,%3,%3, 15,8\n\t" */
+      /* 	:"=r"(tmp),"=r"(tmp1) */
+      /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
+      /* 	: */
+      /* 	      ); printf("%d\t %08lx %08lx\n",i,tmp,tmp1); */
 
   //  sleep(10);
 
@@ -186,7 +184,7 @@ int main(int argc, char **argv){
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
   	  /* "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t" */
-	  //"l.cust5 %1,%19,%19, 15,8\n\t"
+	  "l.cust5 %1,%19,%19, 15,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
@@ -217,22 +215,22 @@ int main(int argc, char **argv){
   	  "l.cust5 %15,%18,%18, 1,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %16,%18,%18, 0,8\n\t"
-	  /* "l.sw 0(%17),%1\n\t" */
-	  /* "l.sw 4(%17),%2\n\t" */
-	  /* "l.sw 8(%17),%3\n\t" */
-	  /* "l.sw 12(%17),%4\n\t" */
-	  /* "l.sw 16(%17),%5\n\t" */
-	  /* "l.sw 20(%17),%6\n\t" */
-	  /* "l.sw 24(%17),%7\n\t" */
-	  /* "l.sw 28(%17),%8\n\t" */
-	  /* "l.sw 32(%17),%9\n\t" */
-	  /* "l.sw 36(%17),%10\n\t" */
-	  /* "l.sw 40(%17),%11\n\t" */
-	  /* "l.sw 44(%17),%12\n\t" */
-	  /* "l.sw 48(%17),%13\n\t" */
-	  /* "l.sw 52(%17),%14\n\t" */
-	  /* "l.sw 56(%17),%15\n\t" */
-	  /* "l.sw 60(%17),%16\n\t" */
+	  "l.sw 0(%17),%1\n\t"
+	  "l.sw 4(%17),%2\n\t"
+	  "l.sw 8(%17),%3\n\t"
+	  "l.sw 12(%17),%4\n\t"
+	  "l.sw 16(%17),%5\n\t"
+	  "l.sw 20(%17),%6\n\t"
+	  "l.sw 24(%17),%7\n\t"
+	  "l.sw 28(%17),%8\n\t"
+	  "l.sw 32(%17),%9\n\t"
+	  "l.sw 36(%17),%10\n\t"
+	  "l.sw 40(%17),%11\n\t"
+	  "l.sw 44(%17),%12\n\t"
+	  "l.sw 48(%17),%13\n\t"
+	  "l.sw 52(%17),%14\n\t"
+	  "l.sw 56(%17),%15\n\t"
+	  "l.sw 60(%17),%16\n\t"
   	  :"=r"(hash32),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
   	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
   	  :"memory"
