@@ -132,7 +132,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	:
-  	      ); printf("%d\t %08lx\n",i,tmp);
+  	      ); printf("START:%d\t %08lx\n",i,tmp);
     }
     else if(i < max-1){
       __asm__(
@@ -141,7 +141,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	:
-  	      );  printf("%d\t %08lx\n",i,tmp);
+  	      );  printf("MIDDLE:%d\t %08lx\n",i,tmp);
     }
     else if(i == max-1){
       __asm__(
@@ -150,7 +150,7 @@ int main(int argc, char **argv){
     	:"=r"(tmp)
     	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
     	:
-    	      ); printf("%d\t %08lx\n",i,tmp);
+    	      ); printf("END:%d\t %08lx\n",i,tmp);
     }
   }//End of "for" loop
 
@@ -168,7 +168,7 @@ int main(int argc, char **argv){
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-	  "l.cust5 %1,%19,%19, 15,8\n\t"
+	  "l.cust5 %1,%18,%19,15,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
@@ -217,7 +217,7 @@ int main(int argc, char **argv){
 	  "l.sw 60(%17),%16\n\t"
   	  :"=r"(hash32),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
   	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
-  	  :"memory"
+  	  ://"memory"
   	  );
   printf("tmp1:%08lx\n",tmp1);
   printf("tmp2:%08lx\n",tmp2);
