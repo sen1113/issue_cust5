@@ -148,10 +148,10 @@ int main(int argc, char **argv){
 	  :"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	  :
 	  );
-  printf("reg1:%08lx\n",reg1);
-  printf("reg2:%08lx\n",reg2);
-  printf("reg3:%08lx\n",reg3);
-  printf("reg4:%08lx\n",reg4);
+  //  printf("reg1:%08lx\n",reg1);
+  //printf("reg2:%08lx\n",reg2);
+  //printf("reg3:%08lx\n",reg3);
+  //printf("reg4:%08lx\n",reg4);
 
 
   /* for(i = 0; i <= max-1; i++){ */
