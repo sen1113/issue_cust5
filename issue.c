@@ -112,6 +112,10 @@ int main(int argc, char **argv){
   unsigned long tmp15 = 0;
   unsigned long tmp16 = 0;
 
+  unsigned long reg1  = 0;
+  unsigned long reg2  = 0;
+  unsigned long reg3  = 0;
+  unsigned long reg4  = 0;
 
 
   //Initialize Keccak
@@ -123,36 +127,55 @@ int main(int argc, char **argv){
 	  );
   printf("Initialize Keccak\n");
   //Input
-  for(i = 0; i <= max-1; i++){
-   input_addr = str1->top_addr + 4*i;//generate next input_addr
-    if (i == 0){
-      __asm__(
-	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%3,0,4\n\t"	//start
-  	:"=r"(tmp)
-  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
-	:
-  	      ); printf("START:%d\t %08lx\n",i,tmp);
-    }
-    else if(i < max-1){
-      __asm__(
-	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%3,0,2\n\t"	//middle
-  	:"=r"(tmp)
-  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
-	:
-  	      );  printf("MIDDLE:%d\t %08lx\n",i,tmp);
-    }
-    else if(i == max-1){
-      __asm__(
-    	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-    	"l.cust5 %2,%0,%3,0,1\n\t"	//end
-    	:"=r"(tmp)
-    	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
-    	:
-    	      ); printf("END:%d\t %08lx\n",i,tmp);
-    }
-  }//End of "for" loop
+  __asm__(
+	  "l.lwz %0,0(%4)\n\t"
+	  "l.lwz %1,4(%4)\n\t"
+	  "l.lwz %2,8(%4)\n\t"
+	  "l.lwz %3,12(%4)\n\t"
+	  "l.cust5 %5,%0,%6,0,4\n\t"
+	  "l.cust5 %5,%1,%6,0,2\n\t"
+	  "l.cust5 %5,%2,%6,0,2\n\t"
+	  "l.cust5 %5,%3,%6,0,1\n\t"
+	  :"=r"(reg1),"=r"(reg2),"=r"(reg3),"=r"(reg4)
+	  :"r"(input_addr),"r"(dummy1),"r"(dummy2)
+	  :
+	  );
+  printf("reg1:%08lx\n",reg1);
+  printf("reg2:%08lx\n",reg2);
+  printf("reg3:%08lx\n",reg3);
+  printf("reg4:%08lx\n",reg4);
+
+
+  /* for(i = 0; i <= max-1; i++){ */
+  /*  input_addr = str1->top_addr + 4*i;//generate next input_addr */
+  /*   if (i == 0){ */
+  /*     __asm__( */
+  /* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
+  /* 	"l.cust5 %2,%0,%3,0,4\n\t"	//start */
+  /* 	:"=r"(tmp) */
+  /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
+  /* 	: */
+  /* 	      ); printf("START:%d\t %08lx\n",i,tmp); */
+  /*   } */
+  /*   else if(i < max-1){ */
+  /*     __asm__( */
+  /* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
+  /* 	"l.cust5 %2,%0,%3,0,2\n\t"	//middle */
+  /* 	:"=r"(tmp) */
+  /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
+  /* 	: */
+  /* 	      );  printf("MIDDLE:%d\t %08lx\n",i,tmp); */
+  /*   } */
+  /*   else if(i == max-1){ */
+  /*     __asm__( */
+  /*   	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
+  /*   	"l.cust5 %2,%0,%3,0,1\n\t"	//end */
+  /*   	:"=r"(tmp) */
+  /*   	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
+  /*   	: */
+  /*   	      ); printf("END:%d\t %08lx\n",i,tmp); */
+  /*   } */
+  /* }//End of "for" loop */
 
   //  sleep(10);
 
