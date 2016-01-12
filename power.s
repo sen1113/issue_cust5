@@ -410,11 +410,11 @@ main:
 	l.lwz   	r6,-100(r2)	 # SI load
 #APP
 # 121 "issue_power.c" 1
-	l.cust5 r5,r5,r5,0,0
 	l.lwz r7,0(r3)
 	l.lwz r8,4(r3)
 	l.lwz r11,8(r3)
 	l.lwz r12,12(r3)
+	l.cust5 r5,r5,r5,0,0
 	l.cust5 r5,r7,r6,0,4
 	l.cust5 r5,r8,r6,0,2
 	l.cust5 r5,r11,r6,0,2
