@@ -119,11 +119,11 @@ int main(int argc, char **argv){
   //Input
   input_addr = str1 -> top_addr;
   __asm__(
-	  "l.cust5 %22,%22,%22,0,0\n\t"
 	  "l.lwz %0,0(%20)\n\t"
 	  "l.lwz %1,4(%20)\n\t"
 	  "l.lwz %2,8(%20)\n\t"
 	  "l.lwz %3,12(%20)\n\t"
+	  "l.cust5 %22,%22,%22,0,0\n\t"	  
 	  "l.cust5 %22,%0,%23,0,4\n\t"
 	  "l.cust5 %22,%1,%23,0,2\n\t"
 	  "l.cust5 %22,%2,%23,0,2\n\t"
