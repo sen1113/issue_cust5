@@ -126,6 +126,7 @@ int main(int argc, char **argv){
 	  );
   printf("Initialize Keccak\n");
   //Input
+  input_addr = str1 -> top_addr;
   __asm__(
 	  "l.lwz %0,0(%4)\n\t"
 	  "l.lwz %1,4(%4)\n\t"
