@@ -88,7 +88,6 @@ int main(int argc, char **argv){
 
   int	i      = 0;
   int	max    = (int)size/4;
-  int store_en = 0;
   unsigned long hash32 = 0;
   unsigned long tmp = 0;
   unsigned long dummy1 = 0;
