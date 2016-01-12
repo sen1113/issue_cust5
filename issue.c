@@ -118,16 +118,17 @@ int main(int argc, char **argv){
 
 
   //Initialize Keccak
-  __asm__(
-	  "l.cust5 %0,%0,%0,0,0\n\t"
-	  :
-	  :"r"(tmp)
-	  :
-	  );
+  /* __asm__( */
+  /* 	  "l.cust5 %0,%0,%0,0,0\n\t" */
+  /* 	  : */
+  /* 	  :"r"(tmp) */
+  /* 	  : */
+  /* 	  ); */
   printf("Initialize Keccak\n");
   //Input
   input_addr = str1 -> top_addr;
   __asm__(
+	  "l.cust5 %5,%5,%5,0,0\n\t"
 	  "l.lwz %0,0(%4)\n\t"
 	  "l.lwz %1,4(%4)\n\t"
 	  "l.lwz %2,8(%4)\n\t"
