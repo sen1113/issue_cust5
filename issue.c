@@ -136,6 +136,13 @@ int main(int argc, char **argv){
 	  "l.cust5 %5,%1,%6,0,2\n\t"
 	  "l.cust5 %5,%2,%6,0,2\n\t"
 	  "l.cust5 %5,%3,%6,0,1\n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 	  :"=r"(reg1),"=r"(reg2),"=r"(reg3),"=r"(reg4)
 	  :"r"(input_addr),"r"(dummy1),"r"(dummy2)
 	  :
