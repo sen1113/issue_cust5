@@ -97,52 +97,50 @@ destroy_str:
 .LC9:
 	.string	"target_addr:%p\n"
 .LC10:
-	.string	"%d\t %08lx\n"
+	.string	"Initialize Keccak"
 .LC11:
-	.string	"%d\t %08lx %08lx\n"
-.LC12:
 	.string	"tmp1:%08lx\n"
-.LC13:
+.LC12:
 	.string	"tmp2:%08lx\n"
-.LC14:
+.LC13:
 	.string	"tmp3:%08lx\n"
-.LC15:
+.LC14:
 	.string	"tmp4:%08lx\n"
-.LC16:
+.LC15:
 	.string	"tmp5:%08lx\n"
-.LC17:
+.LC16:
 	.string	"tmp6:%08lx\n"
-.LC18:
+.LC17:
 	.string	"tmp7:%08lx\n"
-.LC19:
+.LC18:
 	.string	"tmp8:%08lx\n"
-.LC20:
+.LC19:
 	.string	"tmp9:%08lx\n"
-.LC21:
+.LC20:
 	.string	"tmp10:%08lx\n"
-.LC22:
+.LC21:
 	.string	"tmp11:%08lx\n"
-.LC23:
+.LC22:
 	.string	"tmp12:%08lx\n"
-.LC24:
+.LC23:
 	.string	"tmp13:%08lx\n"
-.LC25:
+.LC24:
 	.string	"tmp14:%08lx\n"
-.LC26:
+.LC25:
 	.string	"tmp15:%08lx\n"
-.LC27:
+.LC26:
 	.string	"tmp16:%08lx\n"
-.LC28:
+.LC27:
 	.string	"----------------------------------"
-.LC29:
+.LC28:
 	.string	"SHA-3:KECCAK input"
-.LC30:
+.LC29:
 	.string	"%d:%08lx\n"
-.LC31:
+.LC30:
 	.string	"%d:%s\n"
-.LC32:
+.LC31:
 	.string	"SHA-3:KECCAK output 512bit hash..."
-.LC33:
+.LC32:
 	.string	"%d:\t%p  %08lx\n"
 	.section .text
 	.align	4
@@ -175,13 +173,13 @@ main:
 .LCFI18:
 	l.sw    	-12(r1),r30	 # SI store
 .LCFI19:
-	l.addi	r1,r1,-236	# allocate frame
+	l.addi	r1,r1,-248	# allocate frame
 .LCFI20:
-	l.sw    	-188(r2),r3	 # SI store
-	l.sw    	-192(r2),r4	 # SI store
+	l.sw    	-200(r2),r3	 # SI store
+	l.sw    	-204(r2),r4	 # SI store
 	l.addi  	r3,r0,64	 # move immediate I
 	l.sw    	-52(r2),r3	 # SI store
-	l.lwz   	r3,-192(r2)	 # SI load
+	l.lwz   	r3,-204(r2)	 # SI load
 	l.addi  	r3,r3,4
 	l.lwz   	r3,0(r3)	 # SI load
 	l.jal   	strlen
@@ -192,11 +190,11 @@ main:
 	l.nop			# nop delay slot
 	l.ori   	r3,r11,0	 # move reg to reg
 	l.sw    	-56(r2),r3	 # SI store
-	l.lwz   	r3,-192(r2)	 # SI load
+	l.lwz   	r3,-204(r2)	 # SI load
 	l.addi  	r3,r3,4
 	l.lwz   	r3,0(r3)	 # SI load
 	l.ori   	r14,r3,0	 # move reg to reg
-	l.lwz   	r3,-192(r2)	 # SI load
+	l.lwz   	r3,-204(r2)	 # SI load
 	l.addi  	r3,r3,4
 	l.lwz   	r3,0(r3)	 # SI load
 	l.jal   	strlen
@@ -273,12 +271,12 @@ main:
 	l.sw    	-80(r2),r11	 # SI store
 	l.movhi  	r4,hi(.LC3)
 	l.ori   	r4,r4,lo(.LC3)
-	l.addi  	r3,r2,-184
+	l.addi  	r3,r2,-196
 	l.lwz   	r5,-68(r2)	 # SI load
 	l.sw    	0(r1),r5	 # SI store
 	l.jal   	sprintf
 	l.nop			# nop delay slot
-	l.addi  	r3,r2,-184
+	l.addi  	r3,r2,-196
 	l.addi  	r4,r0,0	 # move immediate I
 	l.addi  	r5,r0,16	 # move immediate I
 	l.jal   	strtoul
@@ -288,12 +286,12 @@ main:
 	l.sw    	0(r3),r4	 # SI store
 	l.movhi  	r4,hi(.LC3)
 	l.ori   	r4,r4,lo(.LC3)
-	l.addi  	r3,r2,-184
+	l.addi  	r3,r2,-196
 	l.lwz   	r5,-76(r2)	 # SI load
 	l.sw    	0(r1),r5	 # SI store
 	l.jal   	sprintf
 	l.nop			# nop delay slot
-	l.addi  	r3,r2,-184
+	l.addi  	r3,r2,-196
 	l.addi  	r4,r0,0	 # move immediate I
 	l.addi  	r5,r0,16	 # move immediate I
 	l.jal   	strtoul
@@ -324,7 +322,7 @@ main:
 	l.nop			# nop delay slot
 	l.movhi  	r3,hi(.LC7)
 	l.ori   	r3,r3,lo(.LC7)
-	l.addi  	r4,r2,-184
+	l.addi  	r4,r2,-196
 	l.sw    	0(r1),r4	 # SI store
 	l.jal   	printf
 	l.nop			# nop delay slot
@@ -392,125 +390,114 @@ main:
 	l.addi  	r8,r0,0	 # move immediate I
 	l.sw    	-168(r2),r8	 # SI store
 	l.addi  	r11,r0,0	 # move immediate I
-	l.sw    	-48(r2),r11	 # SI store
-	l.j     	.L7
+	l.sw    	-172(r2),r11	 # SI store
+	l.addi  	r12,r0,0	 # move immediate I
+	l.sw    	-176(r2),r12	 # SI store
+	l.addi  	r13,r0,0	 # move immediate I
+	l.sw    	-180(r2),r13	 # SI store
+	l.movhi  	r3,hi(.LC10)
+	l.ori   	r3,r3,lo(.LC10)
+	l.jal   	puts
 	l.nop			# nop delay slot
-.L11:
 	l.lwz   	r3,-80(r2)	 # SI load
-	l.lwz   	r4,0(r3)	 # SI load
-	l.lwz   	r3,-48(r2)	 # SI load
-	l.slli  	r3,r3,2
-	l.add   	r3,r4,r3
-	l.sw    	-172(r2),r3	 # SI store
-	l.lwz   	r3,-48(r2)	 # SI load
-	l.sfnei	r3,0
-	l.bf	.L8
-	l.nop			# nop delay slot
-	l.lwz   	r3,-172(r2)	 # SI load
-	l.lwz   	r4,-100(r2)	 # SI load
-	l.lwz   	r5,-104(r2)	 # SI load
+	l.lwz   	r3,0(r3)	 # SI load
+	l.sw    	-184(r2),r3	 # SI store
+	l.lwz   	r3,-184(r2)	 # SI load
+	l.lwz   	r4,-96(r2)	 # SI load
+	l.lwz   	r5,-100(r2)	 # SI load
 #APP
-# 120 "issue.c" 1
-	l.lwz r14,0(r3)
-	l.cust5 r4,r14,r5,0,4
+# 130 "issue.c" 1
+	l.cust5 r4,r4,r4,0,0
+	l.lwz r20,0(r3)
+	l.lwz r18,4(r3)
+	l.lwz r16,8(r3)
+	l.lwz r14,12(r3)
+	l.cust5 r4,r20,r5,0,4
+	l.cust5 r4,r18,r5,0,2
+	l.cust5 r4,r16,r5,0,2
+	l.cust5 r4,r14,r5,0,1
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
 	
 # 0 "" 2
 #NO_APP
-	l.sw    	-96(r2),r14	 # SI store
-	l.movhi  	r3,hi(.LC10)
-	l.ori   	r3,r3,lo(.LC10)
-	l.lwz   	r4,-48(r2)	 # SI load
-	l.sw    	0(r1),r4	 # SI store
-	l.lwz   	r4,-96(r2)	 # SI load
-	l.sw    	4(r1),r4	 # SI store
-	l.jal   	printf
-	l.nop			# nop delay slot
-	l.j     	.L9
-	l.nop			# nop delay slot
-.L8:
-	l.lwz   	r3,-84(r2)	 # SI load
-	l.addi  	r4,r3,-1
-	l.lwz   	r3,-48(r2)	 # SI load
-	l.sfles 	r4,r3
-	l.bf	.L10
-	l.nop			# nop delay slot
-	l.lwz   	r3,-172(r2)	 # SI load
-	l.lwz   	r4,-100(r2)	 # SI load
-	l.lwz   	r5,-104(r2)	 # SI load
-#APP
-# 129 "issue.c" 1
-	l.lwz r14,0(r3)
-	l.cust5 r4,r14,r5,0,2
-	
-# 0 "" 2
-#NO_APP
-	l.sw    	-96(r2),r14	 # SI store
-	l.movhi  	r3,hi(.LC10)
-	l.ori   	r3,r3,lo(.LC10)
-	l.lwz   	r4,-48(r2)	 # SI load
-	l.sw    	0(r1),r4	 # SI store
-	l.lwz   	r4,-96(r2)	 # SI load
-	l.sw    	4(r1),r4	 # SI store
-	l.jal   	printf
-	l.nop			# nop delay slot
-	l.j     	.L9
-	l.nop			# nop delay slot
-.L10:
-	l.lwz   	r3,-84(r2)	 # SI load
-	l.addi  	r4,r3,-1
-	l.lwz   	r3,-48(r2)	 # SI load
-	l.sfne 	r4,r3
-	l.bf	.L9
-	l.nop			# nop delay slot
-	l.lwz   	r3,-172(r2)	 # SI load
-	l.lwz   	r4,-100(r2)	 # SI load
-	l.lwz   	r5,-104(r2)	 # SI load
-#APP
-# 138 "issue.c" 1
-	l.lwz r16,0(r3)
-	l.cust5 r4,r16,r5,0,1
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.nop 
-	l.cust5 r14,r4,r4, 15,8
-	
-# 0 "" 2
-#NO_APP
-	l.sw    	-96(r2),r16	 # SI store
-	l.sw    	-108(r2),r14	 # SI store
-	l.movhi  	r3,hi(.LC11)
-	l.ori   	r3,r3,lo(.LC11)
-	l.lwz   	r4,-48(r2)	 # SI load
-	l.sw    	0(r1),r4	 # SI store
-	l.lwz   	r4,-96(r2)	 # SI load
-	l.sw    	4(r1),r4	 # SI store
-	l.lwz   	r4,-108(r2)	 # SI load
-	l.sw    	8(r1),r4	 # SI store
-	l.jal   	printf
-	l.nop			# nop delay slot
-.L9:
-	l.lwz   	r3,-48(r2)	 # SI load
-	l.addi  	r3,r3,1
-	l.sw    	-48(r2),r3	 # SI store
-.L7:
-	l.lwz   	r3,-84(r2)	 # SI load
-	l.addi  	r4,r3,-1
-	l.lwz   	r3,-48(r2)	 # SI load
-	l.sfges 	r4,r3
-	l.bf	.L11
-	l.nop			# nop delay slot
+	l.sw    	-168(r2),r20	 # SI store
+	l.sw    	-172(r2),r18	 # SI store
+	l.sw    	-176(r2),r16	 # SI store
+	l.sw    	-180(r2),r14	 # SI store
 	l.lwz   	r3,-76(r2)	 # SI load
-	l.lwz   	r4,-100(r2)	 # SI load
-	l.lwz   	r5,-104(r2)	 # SI load
+	l.lwz   	r4,-96(r2)	 # SI load
+	l.lwz   	r5,-100(r2)	 # SI load
 #APP
-# 168 "issue.c" 1
+# 194 "issue.c" 1
 	l.nop 
 	l.nop 
 	l.nop 
@@ -521,7 +508,6 @@ main:
 	l.nop 
 	l.nop 
 	l.nop 
-	l.cust5 r15,r4,r4, 14,8
 	l.nop 
 	l.nop 
 	l.nop 
@@ -532,7 +518,6 @@ main:
 	l.nop 
 	l.nop 
 	l.nop 
-	l.cust5 r17,r4,r4, 13,8
 	l.nop 
 	l.nop 
 	l.nop 
@@ -543,7 +528,6 @@ main:
 	l.nop 
 	l.nop 
 	l.nop 
-	l.cust5 r6,r4,r4, 12,8
 	l.nop 
 	l.nop 
 	l.nop 
@@ -554,7 +538,6 @@ main:
 	l.nop 
 	l.nop 
 	l.nop 
-	l.cust5 r7,r4,r4, 11,8
 	l.nop 
 	l.nop 
 	l.nop 
@@ -565,7 +548,6 @@ main:
 	l.nop 
 	l.nop 
 	l.nop 
-	l.cust5 r8,r4,r4, 10,8
 	l.nop 
 	l.nop 
 	l.nop 
@@ -576,7 +558,83 @@ main:
 	l.nop 
 	l.nop 
 	l.nop 
-	l.cust5 r11,r4,r4, 9,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r17,r4,r5,15,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r6,r4,r4, 14,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r7,r4,r4, 13,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r8,r4,r4, 12,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r11,r4,r4, 11,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r12,r4,r4, 10,8
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.nop 
+	l.cust5 r13,r4,r4, 9,8
 	l.nop 
 	l.nop 
 	l.nop 
@@ -676,13 +734,13 @@ main:
 	l.nop 
 	l.nop 
 	l.cust5 r14,r4,r4, 0,8
-	l.sw 0(r3),r13
-	l.sw 4(r3),r15
-	l.sw 8(r3),r17
-	l.sw 12(r3),r6
-	l.sw 16(r3),r7
-	l.sw 20(r3),r8
-	l.sw 24(r3),r11
+	l.sw 0(r3),r17
+	l.sw 4(r3),r6
+	l.sw 8(r3),r7
+	l.sw 12(r3),r8
+	l.sw 16(r3),r11
+	l.sw 20(r3),r12
+	l.sw 24(r3),r13
 	l.sw 28(r3),r30
 	l.sw 32(r3),r28
 	l.sw 36(r3),r26
@@ -695,39 +753,45 @@ main:
 	
 # 0 "" 2
 #NO_APP
-	l.sw    	-224(r2),r11	 # SI store
-	l.sw    	-220(r2),r8	 # SI store
-	l.sw    	-216(r2),r7	 # SI store
-	l.sw    	-212(r2),r6	 # SI store
-	l.sw    	-208(r2),r17	 # SI store
-	l.sw    	-204(r2),r15	 # SI store
-	l.sw    	-200(r2),r13	 # SI store
-	l.sw    	-196(r2),r12	 # SI store
-	l.lwz   	r12,-196(r2)	 # SI load
-	l.sw    	-92(r2),r12	 # SI store
-	l.lwz   	r13,-200(r2)	 # SI load
-	l.sw    	-108(r2),r13	 # SI store
-	l.lwz   	r15,-204(r2)	 # SI load
-	l.sw    	-112(r2),r15	 # SI store
-	l.lwz   	r17,-208(r2)	 # SI load
-	l.sw    	-116(r2),r17	 # SI store
-	l.lwz   	r3,-212(r2)	 # SI load
-	l.sw    	-120(r2),r3	 # SI store
-	l.lwz   	r6,-216(r2)	 # SI load
-	l.sw    	-124(r2),r6	 # SI store
-	l.lwz   	r7,-220(r2)	 # SI load
-	l.sw    	-128(r2),r7	 # SI store
-	l.lwz   	r8,-224(r2)	 # SI load
-	l.sw    	-132(r2),r8	 # SI store
-	l.sw    	-136(r2),r30	 # SI store
-	l.sw    	-140(r2),r28	 # SI store
-	l.sw    	-144(r2),r26	 # SI store
-	l.sw    	-148(r2),r24	 # SI store
-	l.sw    	-152(r2),r22	 # SI store
-	l.sw    	-156(r2),r20	 # SI store
-	l.sw    	-160(r2),r18	 # SI store
-	l.sw    	-164(r2),r16	 # SI store
-	l.sw    	-168(r2),r14	 # SI store
+	l.sw    	-236(r2),r13	 # SI store
+	l.sw    	-232(r2),r12	 # SI store
+	l.sw    	-228(r2),r11	 # SI store
+	l.sw    	-224(r2),r8	 # SI store
+	l.sw    	-220(r2),r7	 # SI store
+	l.sw    	-216(r2),r6	 # SI store
+	l.sw    	-212(r2),r17	 # SI store
+	l.sw    	-208(r2),r15	 # SI store
+	l.lwz   	r15,-208(r2)	 # SI load
+	l.sw    	-88(r2),r15	 # SI store
+	l.lwz   	r17,-212(r2)	 # SI load
+	l.sw    	-104(r2),r17	 # SI store
+	l.lwz   	r3,-216(r2)	 # SI load
+	l.sw    	-108(r2),r3	 # SI store
+	l.lwz   	r6,-220(r2)	 # SI load
+	l.sw    	-112(r2),r6	 # SI store
+	l.lwz   	r7,-224(r2)	 # SI load
+	l.sw    	-116(r2),r7	 # SI store
+	l.lwz   	r8,-228(r2)	 # SI load
+	l.sw    	-120(r2),r8	 # SI store
+	l.lwz   	r11,-232(r2)	 # SI load
+	l.sw    	-124(r2),r11	 # SI store
+	l.lwz   	r12,-236(r2)	 # SI load
+	l.sw    	-128(r2),r12	 # SI store
+	l.sw    	-132(r2),r30	 # SI store
+	l.sw    	-136(r2),r28	 # SI store
+	l.sw    	-140(r2),r26	 # SI store
+	l.sw    	-144(r2),r24	 # SI store
+	l.sw    	-148(r2),r22	 # SI store
+	l.sw    	-152(r2),r20	 # SI store
+	l.sw    	-156(r2),r18	 # SI store
+	l.sw    	-160(r2),r16	 # SI store
+	l.sw    	-164(r2),r14	 # SI store
+	l.movhi  	r3,hi(.LC11)
+	l.ori   	r3,r3,lo(.LC11)
+	l.lwz   	r4,-104(r2)	 # SI load
+	l.sw    	0(r1),r4	 # SI store
+	l.jal   	printf
+	l.nop			# nop delay slot
 	l.movhi  	r3,hi(.LC12)
 	l.ori   	r3,r3,lo(.LC12)
 	l.lwz   	r4,-108(r2)	 # SI load
@@ -818,50 +882,44 @@ main:
 	l.sw    	0(r1),r4	 # SI store
 	l.jal   	printf
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC27)
-	l.ori   	r3,r3,lo(.LC27)
-	l.lwz   	r4,-168(r2)	 # SI load
-	l.sw    	0(r1),r4	 # SI store
-	l.jal   	printf
-	l.nop			# nop delay slot
 	l.lwz   	r3,-80(r2)	 # SI load
 	l.lwz   	r3,0(r3)	 # SI load
-	l.sw    	-172(r2),r3	 # SI store
+	l.sw    	-184(r2),r3	 # SI store
+	l.movhi  	r3,hi(.LC27)
+	l.ori   	r3,r3,lo(.LC27)
+	l.jal   	puts
+	l.nop			# nop delay slot
 	l.movhi  	r3,hi(.LC28)
 	l.ori   	r3,r3,lo(.LC28)
 	l.jal   	puts
 	l.nop			# nop delay slot
+	l.movhi  	r3,hi(.LC27)
+	l.ori   	r3,r3,lo(.LC27)
+	l.jal   	puts
+	l.nop			# nop delay slot
+	l.addi  	r13,r0,0	 # move immediate I
+	l.sw    	-48(r2),r13	 # SI store
+	l.j     	.L7
+	l.nop			# nop delay slot
+.L8:
 	l.movhi  	r3,hi(.LC29)
 	l.ori   	r3,r3,lo(.LC29)
-	l.jal   	puts
-	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC28)
-	l.ori   	r3,r3,lo(.LC28)
-	l.jal   	puts
-	l.nop			# nop delay slot
-	l.addi  	r11,r0,0	 # move immediate I
-	l.sw    	-48(r2),r11	 # SI store
-	l.j     	.L12
-	l.nop			# nop delay slot
-.L13:
-	l.movhi  	r3,hi(.LC30)
-	l.ori   	r3,r3,lo(.LC30)
 	l.lwz   	r4,-48(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.ori   	r5,r4,0	 # move reg to reg
-	l.lwz   	r4,-172(r2)	 # SI load
+	l.lwz   	r4,-184(r2)	 # SI load
 	l.add   	r4,r5,r4
 	l.lwz   	r5,-48(r2)	 # SI load
 	l.sw    	0(r1),r5	 # SI store
 	l.sw    	4(r1),r4	 # SI store
 	l.jal   	printf
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC31)
-	l.ori   	r3,r3,lo(.LC31)
+	l.movhi  	r3,hi(.LC30)
+	l.ori   	r3,r3,lo(.LC30)
 	l.lwz   	r4,-48(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.ori   	r5,r4,0	 # move reg to reg
-	l.lwz   	r4,-172(r2)	 # SI load
+	l.lwz   	r4,-184(r2)	 # SI load
 	l.add   	r4,r5,r4
 	l.lwz   	r5,-48(r2)	 # SI load
 	l.sw    	0(r1),r5	 # SI store
@@ -871,32 +929,32 @@ main:
 	l.lwz   	r3,-48(r2)	 # SI load
 	l.addi  	r3,r3,1
 	l.sw    	-48(r2),r3	 # SI store
-.L12:
+.L7:
 	l.lwz   	r4,-48(r2)	 # SI load
 	l.lwz   	r3,-72(r2)	 # SI load
 	l.srli  	r3,r3,2
 	l.sfltu 	r4,r3
-	l.bf	.L13
+	l.bf	.L8
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC28)
-	l.ori   	r3,r3,lo(.LC28)
+	l.movhi  	r3,hi(.LC27)
+	l.ori   	r3,r3,lo(.LC27)
 	l.jal   	puts
 	l.nop			# nop delay slot
+	l.movhi  	r3,hi(.LC31)
+	l.ori   	r3,r3,lo(.LC31)
+	l.jal   	puts
+	l.nop			# nop delay slot
+	l.movhi  	r3,hi(.LC27)
+	l.ori   	r3,r3,lo(.LC27)
+	l.jal   	puts
+	l.nop			# nop delay slot
+	l.addi  	r15,r0,0	 # move immediate I
+	l.sw    	-48(r2),r15	 # SI store
+	l.j     	.L9
+	l.nop			# nop delay slot
+.L10:
 	l.movhi  	r3,hi(.LC32)
 	l.ori   	r3,r3,lo(.LC32)
-	l.jal   	puts
-	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC28)
-	l.ori   	r3,r3,lo(.LC28)
-	l.jal   	puts
-	l.nop			# nop delay slot
-	l.addi  	r12,r0,0	 # move immediate I
-	l.sw    	-48(r2),r12	 # SI store
-	l.j     	.L14
-	l.nop			# nop delay slot
-.L15:
-	l.movhi  	r3,hi(.LC33)
-	l.ori   	r3,r3,lo(.LC33)
 	l.lwz   	r4,-48(r2)	 # SI load
 	l.slli  	r4,r4,2
 	l.lwz   	r5,-76(r2)	 # SI load
@@ -915,13 +973,13 @@ main:
 	l.lwz   	r3,-48(r2)	 # SI load
 	l.addi  	r3,r3,1
 	l.sw    	-48(r2),r3	 # SI store
-.L14:
+.L9:
 	l.lwz   	r3,-48(r2)	 # SI load
 	l.sflesi	r3,15
-	l.bf	.L15
+	l.bf	.L10
 	l.nop			# nop delay slot
-	l.movhi  	r3,hi(.LC28)
-	l.ori   	r3,r3,lo(.LC28)
+	l.movhi  	r3,hi(.LC27)
+	l.ori   	r3,r3,lo(.LC27)
 	l.jal   	puts
 	l.nop			# nop delay slot
 	l.lwz   	r3,-60(r2)	 # SI load
