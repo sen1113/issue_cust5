@@ -88,7 +88,8 @@ int main(int argc, char **argv){
 
   int	i      = 0;
   int	max    = (int)size/4;
-  unsigned long hash32 = 0;
+  int byte_num = size % 4;
+  unsigned long zero = 0;
   unsigned long tmp = 0;
   unsigned long dummy1 = 0;
   unsigned long dummy2 = 0;
@@ -111,81 +112,79 @@ int main(int argc, char **argv){
   unsigned long tmp15 = 0;
   unsigned long tmp16 = 0;
 
-  unsigned long reg1  = 0;
-  unsigned long reg2  = 0;
-  unsigned long reg3  = 0;
-  unsigned long reg4  = 0;
-
-
   //Initialize Keccak
-  /* __asm__( */
-  /* 	  "l.cust5 %0,%0,%0,0,0\n\t" */
-  /* 	  : */
-  /* 	  :"r"(tmp) */
-  /* 	  : */
-  /* 	  ); */
-  printf("Initialize Keccak\n");
-  //Input
-  input_addr = str1 -> top_addr;
   __asm__(
-	  "l.cust5 %5,%5,%5,0,0\n\t"
-	  "l.lwz %0,0(%4)\n\t"
-	  "l.lwz %1,4(%4)\n\t"
-	  "l.lwz %2,8(%4)\n\t"
-	  "l.lwz %3,12(%4)\n\t"
-	  "l.cust5 %5,%0,%6,0,4\n\t"
-	  "l.cust5 %5,%1,%6,0,2\n\t"
-	  "l.cust5 %5,%2,%6,0,2\n\t"
-	  "l.cust5 %5,%3,%6,0,1\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-	  :"=r"(reg1),"=r"(reg2),"=r"(reg3),"=r"(reg4)
-	  :"r"(input_addr),"r"(dummy1),"r"(dummy2)
-	  :
-	  );
-  //  printf("reg1:%08lx\n",reg1);
-  //printf("reg2:%08lx\n",reg2);
-  //printf("reg3:%08lx\n",reg3);
-  //printf("reg4:%08lx\n",reg4);
+  	  "l.cust5 %0,%0,%0,0,0\n\t"
+  	  :
+  	  :"r"(tmp)
+  	  :
+  	  );
+  printf("Initialize Keccak\n");
 
+  //Input
+  //TODO: when input file size is under 1byte, end doesn't work...
 
-  /* for(i = 0; i <= max-1; i++){ */
-  /*  input_addr = str1->top_addr + 4*i;//generate next input_addr */
-  /*   if (i == 0){ */
-  /*     __asm__( */
-  /* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-  /* 	"l.cust5 %2,%0,%3,0,4\n\t"	//start */
-  /* 	:"=r"(tmp) */
-  /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
-  /* 	: */
-  /* 	      ); printf("START:%d\t %08lx\n",i,tmp); */
-  /*   } */
-  /*   else if(i < max-1){ */
-  /*     __asm__( */
-  /* 	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-  /* 	"l.cust5 %2,%0,%3,0,2\n\t"	//middle */
-  /* 	:"=r"(tmp) */
-  /* 	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
-  /* 	: */
-  /* 	      );  printf("MIDDLE:%d\t %08lx\n",i,tmp); */
-  /*   } */
-  /*   else if(i == max-1){ */
-  /*     __asm__( */
-  /*   	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp */
-  /*   	"l.cust5 %2,%0,%3,0,1\n\t"	//end */
-  /*   	:"=r"(tmp) */
-  /*   	:"r"(input_addr),"r"(dummy1),"r"(dummy2) */
-  /*   	: */
-  /*   	      ); printf("END:%d\t %08lx\n",i,tmp); */
-  /*   } */
-  /* }//End of "for" loop */
+  for(i = 0; i <= max-1; i++){
+    input_addr = str1->top_addr + 4*i;//generate next input_addr
+    if (i == 0){
+      __asm__(
+  	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%3,0,4\n\t"	//start
+  	:"=r"(tmp)
+  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
+  	:
+  	      ); printf("START:%d\t %08lx\n",i,tmp);
+    }
+    else if(i < max-1){
+      __asm__(
+  	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+  	"l.cust5 %2,%0,%3,0,2\n\t"	//middle
+  	:"=r"(tmp)
+  	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
+  	:
+  	      );  printf("MIDDLE:%d\t %08lx\n",i,tmp);
+    }
+    else if(i == max-1){
+      if(byte_num == 1){
+	__asm__(
+		"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+		"l.cust5 %2,%0,%3,1,1\n\t"	//end
+		:"=r"(tmp)
+		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
+		:
+		); printf("END1:%d\t %08lx\n",i,tmp);
+      }
+      else if(byte_num == 2){
+	__asm__(
+		"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+		"l.cust5 %2,%0,%3,2,1\n\t"	//end
+		:"=r"(tmp)
+		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
+		:
+		); printf("END2:%d\t %08lx\n",i,tmp);
+      }
+      else if(byte_num == 3){
+	__asm__(
+		"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+		"l.cust5 %2,%0,%3,3,1\n\t"	//end
+		:"=r"(tmp)
+		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
+		:
+		); printf("END3:%d\t %08lx\n",i,tmp);
+      }
+      else if(byte_num == 0){
+	__asm__(
+		"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+		"l.cust5 %2,%0,%3,0,2\n\t"	//end (input data is last)
+		"l.cust5 %2,%4,%3,0,1\n\t"//end(input data is 0)
+		:"=r"(tmp)
+		:"r"(input_addr),"r"(dummy1),"r"(dummy2),"r"(zero)
+		:
+		); printf("END3:%d\t %08lx\n",i,tmp);
+      }  
+    }
+  }//End of "for" loop
 
-  //  sleep(10);
 
 /*   //devide ; output ;rotate */
 /*   //l.cust5 hash32 XX,XX, hash_num,storemode */
@@ -199,36 +198,21 @@ int main(int argc, char **argv){
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
-	  "l.cust5 %1,%18,%19,15,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+	  "l.cust5 %1,%18,%18, 15,8\n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %3,%18,%18, 13,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %4,%18,%18, 12,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %5,%18,%18, 11,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %6,%18,%18, 10,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %7,%18,%18, 9,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %8,%18,%18, 8,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %9,%18,%18, 7,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %10,%18,%18, 6,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %11,%18,%18, 5,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %12,%18,%18, 4,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %13,%18,%18, 3,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %14,%18,%18, 2,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %15,%18,%18, 1,8\n\t"
-  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.cust5 %16,%18,%18, 0,8\n\t"
 	  "l.sw 0(%17),%1\n\t"
 	  "l.sw 4(%17),%2\n\t"
@@ -246,7 +230,7 @@ int main(int argc, char **argv){
 	  "l.sw 52(%17),%14\n\t"
 	  "l.sw 56(%17),%15\n\t"
 	  "l.sw 60(%17),%16\n\t"
-  	  :"=r"(hash32),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
+  	  :"=r"(zero),"=r"(tmp1),"=r"(tmp2),"=r"(tmp3),"=r"(tmp4),"=r"(tmp5),"=r"(tmp6),"=r"(tmp7),"=r"(tmp8),"=r"(tmp9),"=r"(tmp10),"=r"(tmp11),"=r"(tmp12),"=r"(tmp13),"=r"(tmp14),"=r"(tmp15),"=r"(tmp16)
   	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
   	  ://"memory"
   	  );
@@ -294,6 +278,3 @@ int main(int argc, char **argv){
   free(target_addr);
   destroy_str(str1);
 }
-
-
-
