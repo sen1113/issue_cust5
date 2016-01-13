@@ -180,7 +180,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2),"r"(zero)
 		:
-		); printf("END3:%d\t %08lx\n",i,tmp);
+		); printf("END0:%d\t %08lx\n",i,tmp);
       }  
     }
   }//End of "for" loop
