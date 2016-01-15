@@ -112,24 +112,23 @@ int main(int argc, char **argv){
   unsigned long tmp15 = 0;
   unsigned long tmp16 = 0;
 
-  //Initialize Keccak
-  __asm__(
-  	  "l.cust5 %0,%0,%0,0,0\n\t"
-  	  :
-  	  :"r"(tmp)
-  	  :
-  	  );
-  printf("Initialize Keccak\n");
+  /* //Initialize Keccak */
+  /* __asm__( */
+  /* 	  "l.cust5 %0,%0,%0,0,0\n\t" */
+  /* 	  : */
+  /* 	  :"r"(tmp) */
+  /* 	  : */
+  /* 	  ); */
 
   //Input
-  //TODO: when input file size is under 1byte, end doesn't work...
 
   for(i = 0; i <= max-1; i++){
     input_addr = str1->top_addr + 4*i;//generate next input_addr
     if (i == 0){
       __asm__(
   	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
-  	"l.cust5 %2,%0,%3,0,4\n\t"	//start
+	"l.cust5 %2,%2,%2,0,0\n\t"//reset  
+	"l.cust5 %2,%0,%3,0,4\n\t"	//start
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
   	:
@@ -152,7 +151,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		); printf("END1:%d\t %08lx\n",i,tmp);
+		); printf("END[1]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 2){
 	__asm__(
@@ -161,7 +160,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		); printf("END2:%d\t %08lx\n",i,tmp);
+		); printf("END[2]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 3){
 	__asm__(
@@ -170,7 +169,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		); printf("END3:%d\t %08lx\n",i,tmp);
+		); printf("END[3]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 0){
 	__asm__(
@@ -180,7 +179,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2),"r"(zero)
 		:
-		); printf("END0:%d\t %08lx\n",i,tmp);
+		); printf("END[0]:%d\t %08lx\n",i,tmp);
       }  
     }
   }//End of "for" loop
@@ -191,6 +190,8 @@ int main(int argc, char **argv){
 /*   //l.sw 0,target_addr,hash32,0; */
 
   __asm__(
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
