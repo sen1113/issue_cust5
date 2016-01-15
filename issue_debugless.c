@@ -190,6 +190,9 @@ int main(int argc, char **argv){
 /*   //l.sw 0,target_addr,hash32,0; */
 
   __asm__(
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"  	  
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 	  "l.cust5 %1,%18,%18, 15,8\n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
   	  "l.cust5 %3,%18,%18, 13,8\n\t"
