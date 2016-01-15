@@ -77,8 +77,8 @@ int main(int argc, char **argv){
   str1 -> size = size;
 
  //debug
-  //  printf("fp_addr:%p\n",fp);
-  printf("input:%p\n",input);
+  printf("fp_addr:%p\n",fp);
+  //printf("input:%p\n",input);
   printf("size:%d\n",size);
   printf("buf:%s\n",buf);
   printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
