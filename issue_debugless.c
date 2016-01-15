@@ -77,7 +77,7 @@ int main(int argc, char **argv){
   str1 -> size = size;
 
  //debug
-  printf("fp_addr:%p\n",fp);
+  //  printf("fp_addr:%p\n",fp);
   printf("input:%p\n",input);
   printf("size:%d\n",size);
   printf("buf:%s\n",buf);
