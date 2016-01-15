@@ -76,13 +76,13 @@ int main(int argc, char **argv){
   str1 -> target_addr = strtoul(buf,NULL,16);
   str1 -> size = size;
 
- //debug
-  printf("fp_addr:%p\n",fp);
-  printf("input:%p\n",input);
-  printf("size:%d\n",size);
-  printf("buf:%s\n",buf);
-  printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
-  printf("target_addr:%p\n",target_addr);
+ /* //debug */
+ /*  printf("fp_addr:%p\n",fp); */
+ /*  printf("input:%p\n",input); */
+ /*  printf("size:%d\n",size); */
+ /*  printf("buf:%s\n",buf); */
+ /*  printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit */
+ /*  printf("target_addr:%p\n",target_addr); */
 
   //inline assembler
 
@@ -112,13 +112,13 @@ int main(int argc, char **argv){
   unsigned long tmp15 = 0;
   unsigned long tmp16 = 0;
 
-  /* //Initialize Keccak */
-  /* __asm__( */
-  /* 	  "l.cust5 %0,%0,%0,0,0\n\t" */
-  /* 	  : */
-  /* 	  :"r"(tmp) */
-  /* 	  : */
-  /* 	  ); */
+  //Initialize Keccak
+  __asm__(
+  	  "l.cust5 %0,%0,%0,0,0\n\t"
+  	  :
+  	  :"r"(tmp)
+  	  :
+  	  );
 
   //Input
 
@@ -258,22 +258,22 @@ int main(int argc, char **argv){
   	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
   	  ://"memory"
   	  );
-  printf("tmp1:%08lx\n",tmp1);
-  printf("tmp2:%08lx\n",tmp2);
-  printf("tmp3:%08lx\n",tmp3);
-  printf("tmp4:%08lx\n",tmp4);
-  printf("tmp5:%08lx\n",tmp5);
-  printf("tmp6:%08lx\n",tmp6);
-  printf("tmp7:%08lx\n",tmp7);
-  printf("tmp8:%08lx\n",tmp8);
-  printf("tmp9:%08lx\n",tmp9);
-  printf("tmp10:%08lx\n",tmp10);
-  printf("tmp11:%08lx\n",tmp11);
-  printf("tmp12:%08lx\n",tmp12);
-  printf("tmp13:%08lx\n",tmp13);
-  printf("tmp14:%08lx\n",tmp14);
-  printf("tmp15:%08lx\n",tmp15);
-  printf("tmp16:%08lx\n",tmp16);
+  /* printf("tmp1:%08lx\n",tmp1); */
+  /* printf("tmp2:%08lx\n",tmp2); */
+  /* printf("tmp3:%08lx\n",tmp3); */
+  /* printf("tmp4:%08lx\n",tmp4); */
+  /* printf("tmp5:%08lx\n",tmp5); */
+  /* printf("tmp6:%08lx\n",tmp6); */
+  /* printf("tmp7:%08lx\n",tmp7); */
+  /* printf("tmp8:%08lx\n",tmp8); */
+  /* printf("tmp9:%08lx\n",tmp9); */
+  /* printf("tmp10:%08lx\n",tmp10); */
+  /* printf("tmp11:%08lx\n",tmp11); */
+  /* printf("tmp12:%08lx\n",tmp12); */
+  /* printf("tmp13:%08lx\n",tmp13); */
+  /* printf("tmp14:%08lx\n",tmp14); */
+  /* printf("tmp15:%08lx\n",tmp15); */
+  /* printf("tmp16:%08lx\n",tmp16); */
 //test
 
   /* input_addr = str1 -> top_addr;// input_addr set again */
