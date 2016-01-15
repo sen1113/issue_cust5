@@ -65,7 +65,6 @@ int main(int argc, char **argv){
   input = (unsigned long*)malloc(filesize);
   size=fread(input,sizeof(unsigned char),filesize,fp);
   byte_num = size %4;
-  printf("byte_num:%d\n",byte_num);
   //target addr setting
   target_addr = (unsigned long*)malloc(msize);
 
@@ -197,6 +196,12 @@ int main(int argc, char **argv){
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"  	  
+	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
 	  "l.cust5 %1,%18,%18, 15,8\n\t"
   	  "l.cust5 %2,%18,%18, 14,8\n\t"
   	  "l.cust5 %3,%18,%18, 13,8\n\t"
@@ -233,6 +238,7 @@ int main(int argc, char **argv){
   	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
   	  ://"memory"
   	  );
+  printf("byte_num:%d\n",byte_num);
   /* printf("tmp1:%08lx\n",tmp1); */
   /* printf("tmp2:%08lx\n",tmp2); */
   /* printf("tmp3:%08lx\n",tmp3); */
