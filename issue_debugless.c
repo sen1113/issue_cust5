@@ -32,12 +32,12 @@ void destroy_str(cust5str_t* str){
 
 
 int main(int argc, char **argv){
-  unsigned long* top_addr;
+  // unsigned long* top_addr;
   unsigned long input_addr;//NOT pointer
   unsigned long* target_addr;
   unsigned long* input;
 
-  unsigned int id;
+  //  unsigned int id;
   unsigned int size;
   unsigned long filesize;
   FILE *fp;
@@ -132,7 +132,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
   	:
-  	      ); //printf("START:%d\t %08lx\n",i,tmp);
+  	      ); printf("START:%d\t %08lx\n",i,tmp);
     }
     else if(i < max-1){
       __asm__(
@@ -301,4 +301,5 @@ int main(int argc, char **argv){
   free(input);
   free(target_addr);
   destroy_str(str1);
+  return 0;
 }
