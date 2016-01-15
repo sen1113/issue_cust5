@@ -132,7 +132,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
   	:
-  	      ); //printf("START:%d\t %08lx\n",i,tmp);
+  	      ); printf("START:%d\t %08lx\n",i,tmp);
     }
     else if(i < max-1){
       __asm__(
@@ -141,7 +141,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
   	:
-  	      );  //printf("MIDDLE:%d\t %08lx\n",i,tmp);
+  	      ); printf("MIDDLE:%d\t %08lx\n",i,tmp);
     }
     else if(i == max-1){
       if(byte_num == 1){
@@ -151,7 +151,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		); //printf("END[1]:%d\t %08lx\n",i,tmp);
+		);printf("END[1]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 2){
 	__asm__(
@@ -160,7 +160,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		); //printf("END[2]:%d\t %08lx\n",i,tmp);
+		);printf("END[2]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 3){
 	__asm__(
@@ -169,7 +169,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		); //printf("END[3]:%d\t %08lx\n",i,tmp);
+		);printf("END[3]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 0){
 	__asm__(
@@ -179,7 +179,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2),"r"(zero)
 		:
-		); //printf("END[0]:%d\t %08lx\n",i,tmp);
+		);printf("END[0]:%d\t %08lx\n",i,tmp);
       }  
     }
   }//End of "for" loop
@@ -242,22 +242,22 @@ int main(int argc, char **argv){
   	  :"r"(target_addr),"r"(dummy1),"r"(dummy2)
   	  ://"memory"
   	  );
-  /* printf("tmp1:%08lx\n",tmp1); */
-  /* printf("tmp2:%08lx\n",tmp2); */
-  /* printf("tmp3:%08lx\n",tmp3); */
-  /* printf("tmp4:%08lx\n",tmp4); */
-  /* printf("tmp5:%08lx\n",tmp5); */
-  /* printf("tmp6:%08lx\n",tmp6); */
-  /* printf("tmp7:%08lx\n",tmp7); */
-  /* printf("tmp8:%08lx\n",tmp8); */
-  /* printf("tmp9:%08lx\n",tmp9); */
-  /* printf("tmp10:%08lx\n",tmp10); */
-  /* printf("tmp11:%08lx\n",tmp11); */
-  /* printf("tmp12:%08lx\n",tmp12); */
-  /* printf("tmp13:%08lx\n",tmp13); */
-  /* printf("tmp14:%08lx\n",tmp14); */
-  /* printf("tmp15:%08lx\n",tmp15); */
-  /* printf("tmp16:%08lx\n",tmp16); */
+  printf("tmp1:%08lx\n",tmp1);
+  printf("tmp2:%08lx\n",tmp2);
+  printf("tmp3:%08lx\n",tmp3);
+  printf("tmp4:%08lx\n",tmp4);
+  printf("tmp5:%08lx\n",tmp5);
+  printf("tmp6:%08lx\n",tmp6);
+  printf("tmp7:%08lx\n",tmp7);
+  printf("tmp8:%08lx\n",tmp8);
+  printf("tmp9:%08lx\n",tmp9);
+  printf("tmp10:%08lx\n",tmp10);
+  printf("tmp11:%08lx\n",tmp11);
+  printf("tmp12:%08lx\n",tmp12);
+  printf("tmp13:%08lx\n",tmp13);
+  printf("tmp14:%08lx\n",tmp14);
+  printf("tmp15:%08lx\n",tmp15);
+  printf("tmp16:%08lx\n",tmp16);
 //test
 
   /* input_addr = str1 -> top_addr;// input_addr set again */
