@@ -128,6 +128,7 @@ int main(int argc, char **argv){
     if (i == 0){
       __asm__(
   	"l.lwz %0,0(%1)\n\t"//LOAD FROM input_addr to tmp
+	"l.cust5 %2,%2,%2,0,0\n\t"
 	"l.cust5 %2,%0,%3,0,4\n\t"	//start
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
