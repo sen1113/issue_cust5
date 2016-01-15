@@ -82,7 +82,7 @@ int main(int argc, char **argv){
   /* printf("size:%d\n",size); */
   /* printf("buf:%s\n",buf); */
   /* printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit */
-  /* printf("target_addr:%p\n",target_addr); */
+  printf("target_addr:%p\n",target_addr); 
 
   //inline assembler
 
@@ -190,6 +190,7 @@ int main(int argc, char **argv){
 /*   //l.sw 0,target_addr,hash32,0; */
 
   __asm__(
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
