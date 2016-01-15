@@ -86,6 +86,9 @@ int main(int argc, char **argv){
   printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
   printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
   printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
+  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
+  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
+  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
 
   //inline assembler
 
