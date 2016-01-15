@@ -82,11 +82,7 @@ int main(int argc, char **argv){
   printf("size:%d\n",size);
   printf("buf:%s\n",buf);
   printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
-  //  printf("target_addr:%p\n",target_addr);
-  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
-  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
-  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
-  printf("test\n");  printf("test\n");  printf("test\n");  printf("test\n");
+  printf("target_addr:%p\n",target_addr);
 
   //inline assembler
 
