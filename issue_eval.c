@@ -48,7 +48,7 @@ int main(int argc, char **argv){
   struct timeval t0;
   struct timeval t1;
 
-  gettimeofday(&t0,NULL);
+
 
   //file open
   char *fname=(char* )malloc(strlen(argv[1])+1);
@@ -116,6 +116,7 @@ int main(int argc, char **argv){
   unsigned long tmp15 = 0;
   unsigned long tmp16 = 0;
   //Initialize Keccak
+  gettimeofday(&t0,NULL);
   __asm__(
   	  "l.cust5 %0,%0,%0,0,0\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
