@@ -88,7 +88,7 @@ int main(int argc, char **argv){
   printf("buf:%s\n",buf);
   //printf("contents of top_addr:%s\n",(char *)(str1->top_addr));//input file 1st 32bit
   printf("target_addr:%p\n",target_addr);
-  //printf("test\n");
+  
   //inline assembler
 
   int	i      = 0;
@@ -119,6 +119,9 @@ int main(int argc, char **argv){
   __asm__(
   	  "l.cust5 %0,%0,%0,0,0\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
+
   	  :
   	  :"r"(tmp)
   	  :
