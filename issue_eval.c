@@ -117,6 +117,7 @@ int main(int argc, char **argv){
   unsigned long tmp16 = 0;
   //Initialize Keccak
   __asm__(
+  	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"  	  
   	  "l.cust5 %0,%0,%0,0,0\n\t"
   	  "l.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\tl.nop \n\t"
   	  :
@@ -136,7 +137,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
   	:
-  	      ); //printf("START:%d\t %08lx\n",i,tmp);
+  	      ); printf("START:%d\t %08lx\n",i,tmp);
     }
     else if(i < max-1){
       __asm__(
@@ -145,7 +146,7 @@ int main(int argc, char **argv){
   	:"=r"(tmp)
   	:"r"(input_addr),"r"(dummy1),"r"(dummy2)
   	:
-  	      ); //printf("MIDDLE:%d\t %08lx\n",i,tmp);
+  	      ); printf("MIDDLE:%d\t %08lx\n",i,tmp);
     }
     else if(i == max-1){
       if(byte_num == 1){
@@ -155,7 +156,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		);//printf("END[1]:%d\t %08lx\n",i,tmp);
+		);printf("END[1]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 2){
 	__asm__(
@@ -164,7 +165,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		);//printf("END[2]:%d\t %08lx\n",i,tmp);
+		);printf("END[2]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 3){
 	__asm__(
@@ -173,7 +174,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2)
 		:
-		);//printf("END[3]:%d\t %08lx\n",i,tmp);
+		);printf("END[3]:%d\t %08lx\n",i,tmp);
       }
       else if(byte_num == 0){
 	__asm__(
@@ -183,7 +184,7 @@ int main(int argc, char **argv){
 		:"=r"(tmp)
 		:"r"(input_addr),"r"(dummy1),"r"(dummy2),"r"(zero)
 		:
-		);//printf("END[0]:%d\t %08lx\n",i,tmp);
+		);printf("END[0]:%d\t %08lx\n",i,tmp);
       }  
     }
   }//End of "for" loop
